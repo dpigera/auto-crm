@@ -10,6 +10,8 @@ Router.map(function() {
   this.route('login');
   this.route('signup');
   this.route('dashboard', function() {
-    this.route('tickets');
+    this.route('tickets', function() {
+      this.route('view', { path: '/:ticket_id' });
+    });
   });
 });

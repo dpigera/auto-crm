@@ -110,4 +110,16 @@ export default class PocketbaseService extends Service {
       return [];
     }
   }
+
+  async getTicket(ticketId) {
+    try {
+      const ticket = await this.client.collection('tickets').getOne(ticketId, {
+        expand: 'requester'
+      });
+      return ticket;
+    } catch (error) {
+      console.error('Failed to fetch ticket:', error);
+      throw error;
+    }
+  }
 }

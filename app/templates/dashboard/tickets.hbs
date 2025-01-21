@@ -1,3 +1,5 @@
+{{outlet}}
+{{#if (eq this.router.currentRouteName 'dashboard.tickets.index')}}
 {{!-- Ticket Meta Info Column --}}
 <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-300 bg-white text-white overflow-y-auto">
   {{!-- Views Section Content --}}
@@ -5,7 +7,6 @@
     <div class="mb-6 text-sm">
       <h2 class="text-black text-xl font-semibold mb-2">Views</h2>
       <div class="border-b border-gray-300 mb-3"></div>
-      
       <div class="space-y-2">
         <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 bg-gray-200 rounded-md transition-colors">
           <span>Unresolved tickets</span>
@@ -48,7 +49,7 @@
       </div>
 
       {{#each this.tickets as |ticket|}}
-        <div class="hover:bg-gray-50 cursor-pointer">
+        <div class="hover:bg-gray-50 cursor-pointer" {{on "click" (fn this.viewTicket ticket.id)}}>
           <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
             <div>
               <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium 
@@ -81,3 +82,4 @@
     </div>
   </div>
 </div> 
+{{/if}}

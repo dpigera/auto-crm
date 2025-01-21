@@ -5,8 +5,10 @@ import { action } from '@ember/object';
 
 export default class DashboardTicketsController extends Controller {
   @service pocketbase;
+  @service router;
   @tracked isMobileMenuOpen = false;
   @tracked tickets = [];
+
 
   constructor() {
     super(...arguments);
@@ -21,6 +23,11 @@ export default class DashboardTicketsController extends Controller {
       console.error('Failed to fetch tickets:', error);
       this.tickets = [];
     }
+  }
+
+  @action
+  viewTicket(ticketId) {
+    this.router.transitionTo('dashboard.tickets.view', ticketId);
   }
 
   // ... any other tickets-specific controller code ...
