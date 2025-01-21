@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-purple-50 flex items-center justify-center">
+<div class="min-h-screen bg-indigo-50 flex items-center justify-center">
   <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-center text-purple-900 mb-8">
+    <h1 class="text-2xl font-bold text-center text-indigo-900 mb-8">
       gauntletai.zendesk.com
     </h1>
     
@@ -19,7 +19,7 @@
           type="email" 
           id="email"
           name="email"
-          class="text-sm w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          class="text-sm w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           placeholder="you@example.com"
           value="dpigera+user1@gmail.com"
           required
@@ -34,7 +34,7 @@
           type="password" 
           id="password"
           name="password"
-          class="text-sm w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          class="text-sm w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
           placeholder="Enter your password"
           value="123password"
           required
@@ -43,7 +43,7 @@
 
       <button 
         type="submit" 
-        class="text-sm w-full py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50"
+        class="text-sm w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
         disabled={{this.isLoading}}
       >
         {{if this.isLoading "Signing in..." "Sign In"}}
@@ -52,7 +52,7 @@
       <div class="mt-6">
         <LinkTo 
           @route="signup" 
-          class="text-sm w-full flex justify-center py-2 px-4 text-sm font-medium text-purple-600 hover:text-purple-500"
+          class="text-sm w-full flex justify-center py-2 px-4 text-sm font-medium text-indigo-600 hover:text-indigo-500"
         >
           New User? Sign up for account
         </LinkTo>

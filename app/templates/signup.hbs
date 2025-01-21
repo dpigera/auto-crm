@@ -19,7 +19,7 @@
                 id="firstName" 
                 name="firstName"
                 type="text" 
-                class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 value="Devin"
                 required
               >
@@ -35,7 +35,7 @@
                 name="lastName"
                 type="text" 
                 required 
-                class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 value="Pigera"
               >
             </div>
@@ -52,7 +52,7 @@
               id="email" 
               type="email" 
               name="email"
-              class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+              class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               value="dpigera+user3@gmail.com"
               required 
             >
@@ -69,7 +69,7 @@
               id="password" 
               type="password" 
               name="password"
-              class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+              class="text-sm appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               value="123password"
               required 
             >
@@ -86,7 +86,7 @@
         <div>
           <button 
             type="submit" 
-            class="text-sm w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            class="text-sm w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             disabled={{this.isLoading}}
           >
             {{if this.isLoading "Creating account..." "Sign up"}}
@@ -97,7 +97,7 @@
       <div class="mt-6">
         <LinkTo 
           @route="login" 
-          class="text-sm w-full flex justify-center py-2 px-4 text-sm font-medium text-purple-600 hover:text-purple-500"
+          class="text-sm w-full flex justify-center py-2 px-4 text-sm font-medium text-indigo-600 hover:text-indigo-500"
         >
           Already have an account? Sign in
         </LinkTo>

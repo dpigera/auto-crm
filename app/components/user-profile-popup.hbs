@@ -6,7 +6,7 @@
       {{!-- Header with Close Button --}}
       <div class="flex justify-between items-start mb-4">
         <div class="flex items-center">
-          <div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center text-purple-700 font-semibold mr-3">
+          <div class="w-10 h-10 bg-indigo-200 rounded-full flex items-center justify-center text-indigo-700 font-semibold mr-3">
             {{initials @user.name}}
           </div>
           <div>
@@ -31,7 +31,7 @@
       <div class="relative pt-4">
         <div class="relative pb-6">
           <select 
-            class="text-sm w-full px-3 py-2 bg-white text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 appearance-none pl-8"
+            class="text-sm w-full px-3 py-2 bg-white text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 appearance-none pl-8"
             {{on "change" this.updateUserStatus}}
           >
             <option value="active" selected={{eq this.currentStatus "active"}}>

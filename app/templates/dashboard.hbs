@@ -1,6 +1,6 @@
 <div class="h-screen flex flex-col">
   {{!-- Header --}}
-  <div class="bg-purple-900 border-b border-purple-800">
+  <div class="bg-indigo-900 border-b border-indigo-800">
     <div class="relative p-4 flex items-center justify-between">
       <div class="flex items-center">
         <img src="/logo.png" alt="Logo" class="h-8 w-auto mr-4">
@@ -16,14 +16,14 @@
   {{!-- Main Content --}}
   <div class="flex-1 flex overflow-hidden">
     {{!-- Menu Column --}}
-    <div class="w-16 bg-purple-900 flex flex-col items-center py-4 relative">
-      <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">
+    <div class="w-16 bg-indigo-900 flex flex-col items-center py-4 relative">
+      <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold">
         WS
       </div>
       
       {{!-- Mobile Menu Button --}}
       <button 
-        class="mt-4 lg:hidden w-10 h-10 flex items-center justify-center text-white hover:bg-purple-800 rounded-lg"
+        class="mt-4 lg:hidden w-10 h-10 flex items-center justify-center text-white hover:bg-indigo-800 rounded-lg"
         {{on "click" this.openMobileMenu}}
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,7 +48,7 @@
     </div>
 
     {{!-- Ticket Meta Info Column --}}
-    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 bg-purple-800 text-white overflow-y-auto">
+    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 bg-indigo-800 text-white overflow-y-auto">
       {{!-- Mobile Close Button --}}
       <button 
         class="lg:hidden absolute top-4 right-4 text-white"
@@ -62,7 +62,7 @@
       <div class="p-4 pt-8 pl-6">
         {{!-- Channels Section --}}
         <div class="mb-6 text-sm">
-          <h2 class="font-semibold text-purple-200 mb-2">Ticket Meta</h2>
+          <h2 class="font-semibold text-indigo-200 mb-2">Ticket Meta</h2>
         </div>
       </div>
     </div>
@@ -85,7 +85,7 @@
       <div class="border-t border-gray-200 p-4 bg-white">
         <div class="mb-3">
           <textarea 
-            class="w-full p-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+            class="w-full p-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
             rows="3"
             placeholder="Type your message here..."
             value={{this.messageText}}
@@ -100,7 +100,7 @@
 
           {{!-- Post Button --}}
           <button 
-            class="text-sm px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="text-sm px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={{not this.messageText}}
             {{on "click" this.postMessage}}
           >
