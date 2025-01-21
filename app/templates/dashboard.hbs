@@ -58,7 +58,7 @@
     </div>
 
     {{!-- Ticket Meta Info Column --}}
-    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-200 bg-white text-white overflow-y-auto">
+    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-300 bg-white text-white overflow-y-auto">
       
       {{!-- Mobile Close Button --}}
       <button 
@@ -74,22 +74,22 @@
         {{!-- Views Section --}}
         <div class="mb-6 text-sm">
           <h2 class="text-gray-500 text-sm font-medium mb-2">Views</h2>
-          <div class="border-b border-gray-200 mb-3"></div>
+          <div class="border-b border-gray-300 mb-3"></div>
           
           <div class="space-y-2">
             <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <span>Unresolved tickets</span>
-              <span class="text-gray-500">{{random 0 5}}</span>
+              <span class="text-gray-500">2</span>
             </button>
             
             <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <span>Unassigned tickets</span>
-              <span class="text-gray-500">{{random 0 5}}</span>
+              <span class="text-gray-500">0</span>
             </button>
             
             <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
               <span>Recently updated tickets</span>
-              <span class="text-gray-500">{{random 0 5}}</span>
+              <span class="text-gray-500">0</span>
             </button>
           </div>
         </div>
@@ -111,7 +111,7 @@
       </div>
 
       {{!-- Message Input Section --}}
-      <div class="border-t border-gray-200 p-4 bg-white">
+      {{!-- <div class="border-t border-gray-200 p-4 bg-white">
         <div class="mb-3">
           <textarea 
             class="w-full p-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
@@ -121,13 +121,8 @@
             {{on "input" this.updateMessageText}}
           ></textarea>
         </div>
-        
         <div class="flex items-center justify-between">
-          <div class="flex space-x-2">
-
-          </div>
-
-          {{!-- Post Button --}}
+          <div class="flex space-x-2"></div>
           <button 
             class="text-sm px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={{not this.messageText}}
@@ -136,16 +131,16 @@
             Post
           </button>
         </div>
-      </div>
+      </div> --}}
     </div>
 
     {{!-- Requested Info Column --}}
-    <div class="w-96 border-l border-gray-200 flex flex-col h-full">
+    {{!-- <div class="w-96 border-l border-gray-200 flex flex-col h-full">
       <div class="p-4 border-b border-gray-200 bg-gray-100 z-10">
         <div class="flex justify-end mb-3">
       </div>
 
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>
