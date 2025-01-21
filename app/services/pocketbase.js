@@ -53,6 +53,7 @@ export default class PocketbaseService extends Service {
   }
 
   async getUsers() {
+    await this.authSuperUser();
     const users = await this.client.collection('users').getFullList();
     return users;
   }
@@ -92,6 +93,7 @@ export default class PocketbaseService extends Service {
   }
 
   async getUser(userId) {
+    await this.authSuperUser();
     const user = await this.client.collection('users').getOne(userId);
     return user;
   }

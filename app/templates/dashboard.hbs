@@ -48,10 +48,11 @@
     </div>
 
     {{!-- Ticket Meta Info Column --}}
-    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 bg-indigo-800 text-white overflow-y-auto">
+    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-200 bg-white text-white overflow-y-auto">
+      
       {{!-- Mobile Close Button --}}
       <button 
-        class="lg:hidden absolute top-4 right-4 text-white"
+        class="lg:hidden absolute top-4 right-4 text-gray-400"
         {{on "click" this.closeMobileMenu}}
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +63,7 @@
       <div class="p-4 pt-8 pl-6">
         {{!-- Channels Section --}}
         <div class="mb-6 text-sm">
-          <h2 class="font-semibold text-indigo-200 mb-2">Ticket Meta</h2>
+          <h2 class="text-gray-500 text-sm mb-2">Ticket Meta</h2>
         </div>
       </div>
     </div>

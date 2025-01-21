@@ -9,6 +9,8 @@ export default class DashboardController extends Controller {
   @service session;
   @service pocketbase;
 
+  @tracked isMobileMenuOpen = false;
+
   @tracked isProfileOpen = false;
   @tracked messages = [];
   
