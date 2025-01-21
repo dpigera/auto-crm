@@ -36,7 +36,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.APP.API_HOST = 'https://gauntlet-chatgenius-project2-final.fly.dev/';
+    ENV.APP.API_HOST = 'https://gauntlet-autocrm-mvp.fly.dev/';
   }
 
   return ENV;
