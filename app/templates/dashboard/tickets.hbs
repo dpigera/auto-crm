@@ -32,7 +32,7 @@
     {{!-- Header Section --}}
     <div class="mb-6">
       <h1 class="text-xl font-semibold text-gray-900">Unresolved tickets</h1>
-      <p class="text-sm text-gray-500 mt-1">3 tickets</p>
+      <p class="text-sm text-gray-500 mt-1">{{this.tickets.length}} tickets</p>
     </div>
 
     {{!-- Table Header --}}
@@ -47,62 +47,37 @@
         </div>
       </div>
 
-      {{!-- Sample Table Row --}}
-      <div class="hover:bg-gray-50 cursor-pointer">
-        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800">
-              In Progress
-            </span>
-          </div>
-          <div class="text-gray-900">Unable to access dashboard after login</div>
-          <div class="text-gray-500">Tom Cook</div>
-          <div class="text-gray-500">24m ago</div>
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-red-100 text-red-800">
-              High
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {{!-- Second Sample Row --}}
-      <div class="hover:bg-gray-50 cursor-pointer">
-        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800">
-              New
-            </span>
-          </div>
-          <div class="text-gray-900">Payment method declined</div>
-          <div class="text-gray-500">Sarah Wilson</div>
-          <div class="text-gray-500">2h ago</div>
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800">
-              Medium
-            </span>
+      {{#each this.tickets as |ticket|}}
+        <div class="hover:bg-gray-50 cursor-pointer">
+          <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
+            <div>
+              <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium 
+                {{if (eq ticket.status 'open') 'bg-red-100 text-red-800'}}
+                {{if (eq ticket.status 'in_progress') 'bg-orange-100 text-orange-800'}}
+                {{if (eq ticket.status 'pending') 'bg-yellow-100 text-yellow-800'}}
+                {{if (eq ticket.status 'solved') 'bg-green-100 text-green-800'}}">
+                {{#if (eq ticket.status 'in_progress')}}
+                  In Progress
+                {{else}}
+                  {{capitalize ticket.status}}
+                {{/if}}
+              </span>
+            </div>
+            <div class="text-gray-900">{{ticket.subject}}</div>
+            <div class="text-gray-500">{{ticket.expand.requester.name}}</div>
+            <div class="text-gray-500">{{relative-time ticket.updated}}</div>
+            <div>
+              <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium
+                {{if (eq ticket.priority 'urgent') 'bg-red-100 text-red-800'}}
+                {{if (eq ticket.priority 'high') 'bg-orange-100 text-orange-800'}}
+                {{if (eq ticket.priority 'normal') 'bg-yellow-100 text-yellow-800'}}
+                {{if (eq ticket.priority 'low') 'bg-green-100 text-green-800'}}">
+                {{capitalize ticket.priority}}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-
-      {{!-- Third Sample Row --}}
-      <div class="hover:bg-gray-50 cursor-pointer">
-        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-blue-100 text-blue-800">
-              On Hold
-            </span>
-          </div>
-          <div class="text-gray-900">Export functionality not working</div>
-          <div class="text-gray-500">Alex Chen</div>
-          <div class="text-gray-500">1d ago</div>
-          <div>
-            <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
-              Low
-            </span>
-          </div>
-        </div>
-      </div>
+      {{/each}}
     </div>
   </div>
 </div> 

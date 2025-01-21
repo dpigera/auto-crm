@@ -97,4 +97,17 @@ export default class PocketbaseService extends Service {
       return [];
     }
   }
+
+  async getTickets() {
+    try {
+      const tickets = await this.client.collection('tickets').getFullList({
+        sort: '-created',
+        expand: 'requester'
+      });
+      return tickets;
+    } catch (error) {
+      console.error('Failed to fetch tickets:', error);
+      return [];
+    }
+  }
 }
