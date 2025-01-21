@@ -71,9 +71,27 @@
       </button>
 
       <div class="p-4 pt-8 pl-6">
-        {{!-- Channels Section --}}
+        {{!-- Views Section --}}
         <div class="mb-6 text-sm">
-          <h2 class="text-gray-500 text-sm mb-2">Ticket Meta</h2>
+          <h2 class="text-gray-500 text-sm font-medium mb-2">Views</h2>
+          <div class="border-b border-gray-200 mb-3"></div>
+          
+          <div class="space-y-2">
+            <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <span>Unresolved tickets</span>
+              <span class="text-gray-500">{{random 0 5}}</span>
+            </button>
+            
+            <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <span>Unassigned tickets</span>
+              <span class="text-gray-500">{{random 0 5}}</span>
+            </button>
+            
+            <button class="w-full flex items-center justify-between py-2 px-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+              <span>Recently updated tickets</span>
+              <span class="text-gray-500">{{random 0 5}}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
