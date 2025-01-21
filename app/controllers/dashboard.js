@@ -17,6 +17,10 @@ export default class DashboardController extends Controller {
   @tracked userStatus = 'active';
   @tracked messageText = '';
 
+  get isTicketsRoute() {
+    return this.router.currentRouteName === 'dashboard.tickets';
+  }
+
   init() {
     super.init(...arguments);
     console.log("dashboard.js.init()");

@@ -28,7 +28,7 @@ export default class LoginController extends Controller {
 
       if (this.session.isAuthenticated) {
         // Redirect to dashboard on success
-        await this.router.transitionTo('dashboard');
+        await this.router.transitionTo('dashboard.tickets');
       }
     } catch (error) {
       // Display error message

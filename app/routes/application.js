@@ -13,7 +13,7 @@ export default class ApplicationRoute extends Route {
     if (this.session.isAuthenticated) {
       const currentRouteName = this.router.currentRouteName;
       if (currentRouteName === 'login' || currentRouteName === 'index' || currentRouteName === null) {
-        this.router.transitionTo('dashboard');
+        this.router.transitionTo('dashboard.tickets');
       }
     }else{
         this.router.transitionTo('login');

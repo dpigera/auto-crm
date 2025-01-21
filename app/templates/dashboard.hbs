@@ -8,7 +8,6 @@
       
       <div class="w-96">{{!-- Empty div for flex spacing --}}</div>
       <div class="flex items-center space-x-3">
-     
       </div>
     </div>
   </div>
@@ -18,18 +17,18 @@
     {{!-- Menu Column --}}
     <div class="w-16 bg-indigo-900 flex flex-col items-center py-4 relative">
       {{!-- Home Icon --}}
-      <div class="hover:bg-indigo-700 p-2 rounded-lg cursor-pointer">
+      <LinkTo @route="dashboard" class="hover:bg-indigo-700 p-2 rounded-lg cursor-pointer">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
-      </div>
+      </LinkTo>
       
       {{!-- Tickets Icon --}}
-      <div class="hover:bg-indigo-600 bg-indigo-700 p-2 rounded-lg cursor-pointer mt-2">
+      <LinkTo @route="dashboard.tickets" class="hover:bg-indigo-600 p-2 rounded-lg cursor-pointer mt-2 {{if this.isTicketsRoute 'bg-indigo-700'}}">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
         </svg>
-      </div>
+      </LinkTo>
       
       {{!-- Mobile Menu Button --}}
       <button 
@@ -57,156 +56,7 @@
       />
     </div>
 
-    {{!-- Ticket Meta Info Column --}}
-    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-300 bg-white text-white overflow-y-auto">
-      
-      {{!-- Mobile Close Button --}}
-      <button 
-        class="lg:hidden absolute top-4 right-4 text-gray-400"
-        {{on "click" this.closeMobileMenu}}
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
-      <div class="p-4 pt-6 pl-6">
-        {{!-- Views Section --}}
-        <div class="mb-6 text-sm">
-          <h2 class="text-black text-xl font-semibold mb-2">Views</h2>
-          <div class="border-b border-gray-300 mb-3"></div>
-          
-          <div class="space-y-2">
-            <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 bg-gray-200 rounded-md transition-colors">
-              <span>Unresolved tickets</span>
-              <span class="text-gray-500">2</span>
-            </button>
-            
-            <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
-              <span>Unassigned tickets</span>
-              <span class="text-gray-500">0</span>
-            </button>
-            
-            <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
-              <span>Recently updated tickets</span>
-              <span class="text-gray-500">0</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {{!-- Messages Column --}}
-    <div class="flex-1 bg-white flex flex-col">
-      <div class="flex-1 overflow-y-auto p-6 messages-container">
-        {{!-- Header Section --}}
-        <div class="mb-6">
-          <h1 class="text-xl font-semibold text-gray-900">Unresolved tickets</h1>
-          <p class="text-sm text-gray-500 mt-1">3 tickets</p>
-        </div>
-
-        {{!-- Table Header --}}
-        <div class="min-w-full">
-          <div class="border-b border-gray-200">
-            <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 pb-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-              <div>Ticket status</div>
-              <div>Subject</div>
-              <div>Requested</div>
-              <div>Updated</div>
-              <div>Priority</div>
-            </div>
-          </div>
-
-          {{!-- Sample Table Row --}}
-          <div class="hover:bg-gray-50 cursor-pointer">
-            <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800">
-                  In Progress
-                </span>
-              </div>
-              <div class="text-gray-900">Unable to access dashboard after login</div>
-              <div class="text-gray-500">Tom Cook</div>
-              <div class="text-gray-500">24m ago</div>
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-red-100 text-red-800">
-                  High
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {{!-- Second Sample Row --}}
-          <div class="hover:bg-gray-50 cursor-pointer">
-            <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800">
-                  New
-                </span>
-              </div>
-              <div class="text-gray-900">Payment method declined</div>
-              <div class="text-gray-500">Sarah Wilson</div>
-              <div class="text-gray-500">2h ago</div>
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800">
-                  Medium
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {{!-- Third Sample Row --}}
-          <div class="hover:bg-gray-50 cursor-pointer">
-            <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-blue-100 text-blue-800">
-                  On Hold
-                </span>
-              </div>
-              <div class="text-gray-900">Export functionality not working</div>
-              <div class="text-gray-500">Alex Chen</div>
-              <div class="text-gray-500">1d ago</div>
-              <div>
-                <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium bg-gray-100 text-gray-800">
-                  Low
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {{!-- Message Input Section --}}
-      {{!-- <div class="border-t border-gray-200 p-4 bg-white">
-        <div class="mb-3">
-          <textarea 
-            class="w-full p-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
-            rows="3"
-            placeholder="Type your message here..."
-            value={{this.messageText}}
-            {{on "input" this.updateMessageText}}
-          ></textarea>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="flex space-x-2"></div>
-          <button 
-            class="text-sm px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={{not this.messageText}}
-            {{on "click" this.postMessage}}
-          >
-            Post
-          </button>
-        </div>
-      </div> --}}
-    </div>
-
-    {{!-- Requested Info Column --}}
-    {{!-- <div class="w-96 border-l border-gray-200 flex flex-col h-full">
-      <div class="p-4 border-b border-gray-200 bg-gray-100 z-10">
-        <div class="flex justify-end mb-3">
-      </div>
-
-      </div>
-    </div> --}}
+    {{!-- Nested route content will be rendered here --}}
+    {{outlet}}
   </div>
 </div>
