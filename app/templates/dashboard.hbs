@@ -1,0 +1,122 @@
+<div class="h-screen flex flex-col">
+  {{!-- Header --}}
+  <div class="bg-purple-900 border-b border-purple-800">
+    <div class="relative p-4 flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="/logo.png" alt="Logo" class="h-8 w-auto mr-4">
+      </div>
+      
+      <div class="w-96">{{!-- Empty div for flex spacing --}}</div>
+      <div class="flex items-center space-x-3">
+     
+      </div>
+    </div>
+  </div>
+
+  {{!-- Main Content --}}
+  <div class="flex-1 flex overflow-hidden">
+    {{!-- Menu Column --}}
+    <div class="w-16 bg-purple-900 flex flex-col items-center py-4 relative">
+      <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white font-bold">
+        WS
+      </div>
+      
+      {{!-- Mobile Menu Button --}}
+      <button 
+        class="mt-4 lg:hidden w-10 h-10 flex items-center justify-center text-white hover:bg-purple-800 rounded-lg"
+        {{on "click" this.openMobileMenu}}
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <button 
+        class="mt-auto w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center hover:opacity-90"
+        {{on "click" (fn (mut this.isProfileOpen) (not this.isProfileOpen))}}
+        {{!-- {{on "mousedown" (fn (mut this.isProfileOpen) (not this.isProfileOpen))}} --}}
+      >
+        {{initials this.pocketbase.currentUser.name}}
+      </button>
+
+      <UserProfilePopup 
+        @user={{this.pocketbase.currentUser}}
+        @isOpen={{this.isProfileOpen}} 
+        @onClose={{fn (mut this.isProfileOpen) false}}
+        @onLogout={{this.logout}}
+      />
+    </div>
+
+    {{!-- Ticket Meta Info Column --}}
+    <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 bg-purple-800 text-white overflow-y-auto">
+      {{!-- Mobile Close Button --}}
+      <button 
+        class="lg:hidden absolute top-4 right-4 text-white"
+        {{on "click" this.closeMobileMenu}}
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="p-4 pt-8 pl-6">
+        {{!-- Channels Section --}}
+        <div class="mb-6 text-sm">
+          <h2 class="font-semibold text-purple-200 mb-2">Ticket Meta</h2>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Messages Column --}}
+    <div class="flex-1 bg-white flex flex-col">
+      <div class="flex-1 overflow-y-auto p-6 messages-container">
+        <div class="space-y-5">
+          {{#if this.messages}}
+            {{#each this.messages as |message index|}}
+              <div>Message {{index}}</div>
+            {{/each}}
+          {{else}}
+            <div class="text-sm italic text-gray-500">No messages</div>
+          {{/if}}
+        </div>
+      </div>
+
+      {{!-- Message Input Section --}}
+      <div class="border-t border-gray-200 p-4 bg-white">
+        <div class="mb-3">
+          <textarea 
+            class="w-full p-3 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+            rows="3"
+            placeholder="Type your message here..."
+            value={{this.messageText}}
+            {{on "input" this.updateMessageText}}
+          ></textarea>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <div class="flex space-x-2">
+
+          </div>
+
+          {{!-- Post Button --}}
+          <button 
+            class="text-sm px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={{not this.messageText}}
+            {{on "click" this.postMessage}}
+          >
+            Post
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Requested Info Column --}}
+    <div class="w-96 border-l border-gray-200 flex flex-col h-full">
+      <div class="p-4 border-b border-gray-200 bg-gray-100 z-10">
+        <div class="flex justify-end mb-3">
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

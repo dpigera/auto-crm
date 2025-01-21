@@ -1,0 +1,78 @@
+{{#if @isOpen}}
+  <div 
+    class="absolute bottom-0 left-0 mb-16 ml-4 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50"
+  >
+    <div class="p-4">
+      {{!-- Header with Close Button --}}
+      <div class="flex justify-between items-start mb-4">
+        <div class="flex items-center">
+          <div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center text-purple-700 font-semibold mr-3">
+            {{initials @user.name}}
+          </div>
+          <div>
+            <div class="text-sm font-bold">{{@user.name}}</div>
+            <div class="text-sm text-gray-500">AutoCRM User</div>
+          </div>
+        </div>
+        <button 
+          class="text-gray-400 hover:text-gray-600"
+          {{on "click" @onClose}}
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      {{!-- Divider --}}
+      {{!-- <div class="border-b border-gray-300 -mx-4 mb-2"></div> --}}
+
+      {{!-- Status Section --}}
+      <div class="relative pt-4">
+        <div class="relative pb-6">
+          <select 
+            class="text-sm w-full px-3 py-2 bg-white text-gray-900 rounded-md border border-gray-300 cursor-pointer focus:outline-none focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50 appearance-none pl-8"
+            {{on "change" this.updateUserStatus}}
+          >
+            <option value="active" selected={{eq this.currentStatus "active"}}>
+              Active
+            </option>
+            <option value="away" selected={{eq this.currentStatus "away"}}>
+              Away
+            </option>
+            <option value="busy" selected={{eq this.currentStatus "busy"}}>
+              Busy
+            </option>
+          </select>
+
+            {{!-- Absolute positioned status circle --}}
+          <div class="absolute left-2 top-1/2 -translate-y-5 pointer-events-none">
+            {{#if (eq this.currentStatus "active")}}
+              <div class="w-4 h-4 rounded-full bg-green-500"></div>
+            {{else if (eq this.currentStatus "away")}}
+              <div class="w-4 h-4 rounded-full bg-yellow-500"></div>
+            {{else if (eq this.currentStatus "busy")}}
+              <div class="w-4 h-4 rounded-full bg-red-500"></div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+      {{!-- Divider --}}
+      {{!-- <div class="border-b border-gray-300 -mx-4 mb-2"></div> --}}
+
+      {{!-- Logout Section --}}
+      <div>
+        <button 
+          class="text-sm w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-red-600 flex items-center"
+          {{on "click" @onLogout}}
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+{{/if}} 
