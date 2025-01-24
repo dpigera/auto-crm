@@ -18,6 +18,20 @@
       <div class="space-y-4">
         
         <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Assignee</label>
+          <select 
+            class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            {{on "change" this.updateAssignee}}
+          >
+            {{#each this.users as |user|}}
+              <option value={{user.id}} selected={{eq this.ticket.assignee user.id}}>
+                {{user.name}}
+              </option>
+            {{/each}}
+          </select>
+        </div>
+
+        <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700">Status</label>
           <select 
             class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"

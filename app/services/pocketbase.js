@@ -38,7 +38,8 @@ export default class PocketbaseService extends Service {
   }
 
   async getUsers() {
-    const users = await this.client.collection('users').getFullList();
+    const users = await this.client.collection('users').getFullList({sort: '-created',
+      $autoCancel: false,});
     return users;
   }
 

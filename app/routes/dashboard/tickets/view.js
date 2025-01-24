@@ -7,6 +7,7 @@ export default class DashboardTicketsViewRoute extends Route {
   setupController(controller, model) {
     super.setupController(controller, model);
     controller.reloadData();
+    controller.fetchUsers();
   }
 
   async model(params) {

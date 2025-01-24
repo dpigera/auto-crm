@@ -11,6 +11,16 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked descriptionDraft = '';
   @tracked isEditingSubject = false;
   @tracked subjectDraft = '';
+  @tracked users = [];
+
+  async fetchUsers() {
+    try {
+      const records = await this.pocketbase.getUsers();
+      this.users = records;
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
+    }
+  }
 
   reloadData() {
     this.ticket = null;
@@ -108,6 +118,19 @@ export default class DashboardTicketsViewController extends Controller {
       this.ticket = updatedTicket;
     } catch (error) {
       console.error('Failed to update status:', error);
+    }
+  }
+
+  @action
+  async updateAssignee(event) {
+    try {
+      const newAssignee = event.target.value;
+      const updatedTicket = await this.pocketbase.updateTicket(this.ticket.id, {
+        assignee: newAssignee
+      });
+      this.ticket = updatedTicket;
+    } catch (error) {
+      console.error('Failed to update assignee:', error);
     }
   }
 } 
