@@ -201,4 +201,18 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async createTicketMessage(messageData) {
+    try {
+      const record = await this.client.collection('ticketMessages').create({
+        message: messageData.message,
+        ticket: messageData.ticketId,
+        user: messageData.userId
+      });
+      return record;
+    } catch (error) {
+      console.error('Failed to create ticket message:', error);
+      throw error;
+    }
+  }
 }

@@ -15,6 +15,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked users = [];
   @tracked ticketMessages = [];
   @tracked requesterDetails = null;
+  @tracked messageDraft = '';
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -177,6 +178,38 @@ export default class DashboardTicketsViewController extends Controller {
       await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update requester:', error);
+    }
+  }
+
+  @action
+  updateMessageDraft(event) {
+    this.messageDraft = event.target.value;
+  }
+
+  @action
+  async postTicketMessage() {
+    if (!this.messageDraft.trim()) {
+      return; // Don't post empty messages
+    }
+
+    try {
+      const currentUser = this.pocketbase.currentUser
+      debugger;
+      await this.pocketbase.createTicketMessage({
+        message: this.messageDraft,
+        ticketId: this.ticket.id,
+        userId: currentUser.id
+      });
+
+      // Clear the draft
+      this.messageDraft = '';
+      
+      // Refresh the messages list
+      const messages = await this.pocketbase.fetchTicketMessages(this.ticket.id);
+      this.ticketMessages = messages.items;
+      debugger;
+    } catch (error) {
+      console.error('Failed to post message:', error);
     }
   }
 } 

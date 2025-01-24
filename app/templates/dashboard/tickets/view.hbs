@@ -205,6 +205,27 @@
       {{else}}
         <p class="text-gray-500 italic text-sm">No messages yet</p>
       {{/if}}
+
+      {{!-- Post message section --}}
+      <div class="mt-6 border-t border-gray-200 pt-4">
+        <div class="space-y-3">
+          <textarea 
+            class="w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[100px] resize-none"
+            placeholder="Type your message here..."
+            value={{this.messageDraft}}
+            {{on "input" this.updateMessageDraft}}
+          ></textarea>
+          <div class="flex justify-end">
+            <button 
+              type="button" 
+              class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+              {{on "click" this.postTicketMessage}}
+            >
+              Post
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
