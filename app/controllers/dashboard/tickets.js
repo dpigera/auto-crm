@@ -9,6 +9,7 @@ export default class DashboardTicketsController extends Controller {
   @tracked isMobileMenuOpen = false;
   @tracked tickets = [];
   @tracked isModalOpen = false;
+  @tracked users = [];
 
   constructor() {
     super(...arguments);
@@ -33,11 +34,21 @@ export default class DashboardTicketsController extends Controller {
   @action
   async saveTicket(ticketData) {
     try {
-      // Add your save logic here
-      // await this.store.createRecord('ticket', ticketData).save();
+      await this.pocketbase.createTicket(ticketData);
       this.isModalOpen = false;
+      await this.fetchTickets();
     } catch (error) {
       console.error('Failed to save ticket:', error);
+    }
+  }
+
+  @action
+  async fetchUsers() {
+    try {
+      const records = await this.pocketbase.getUsers();
+      this.users = records;
+    } catch (error) {
+      console.error('Failed to fetch users:', error);
     }
   }
 

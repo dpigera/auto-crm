@@ -120,4 +120,25 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async createTicket(ticketData) {
+    try {
+      const data = {
+        subject: ticketData.subject,
+        description: ticketData.description,
+        assignee: ticketData.assignee,
+        status: 'open', // Default status for new tickets
+        created: new Date().toISOString(),
+        updated: new Date().toISOString()
+      };
+
+      debugger;
+
+      const record = await this.client.collection('tickets').create(data);
+      return record;
+    } catch (error) {
+      console.error('Failed to create ticket:', error);
+      throw error;
+    }
+  }
 }

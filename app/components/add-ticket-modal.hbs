@@ -24,7 +24,7 @@
               <label for="assignee" class="block text-sm font-medium text-gray-700">Assignee</label>
               <select 
                 id="assignee" 
-                class="mt-1 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 {{on "change" this.onAssigneeChange}}
               >
                 <option value="" class="text-sm">Select an assignee</option>
@@ -39,7 +39,7 @@
               <input 
                 type="text" 
                 id="subject"
-                class="mt-1 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 {{on "input" this.onSubjectChange}}
               >
             </div>
@@ -49,7 +49,7 @@
               <textarea 
                 id="description" 
                 rows="4"
-                class="mt-1 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 {{on "input" this.onDescriptionChange}}
               ></textarea>
             </div>
