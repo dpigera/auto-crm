@@ -1,0 +1,33 @@
+<div class="p-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">User Details</h1>
+  </div>
+
+  {{#if this.user}}
+    <div class="bg-white rounded-lg border border-gray-200 p-6">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Name</label>
+          <p class="mt-1 text-sm text-gray-900">{{this.user.name}}</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <p class="mt-1 text-sm text-gray-900">{{this.user.email}}</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Created</label>
+          <p class="mt-1 text-sm text-gray-900">{{this.user.created}}</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Verified</label>
+          <p class="mt-1 text-sm text-gray-900">{{if this.user.verified "Yes" "No"}}</p>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p class="text-gray-500">User not found.</p>
+  {{/if}}
+</div> 

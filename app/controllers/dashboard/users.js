@@ -5,6 +5,7 @@ import { action } from '@ember/object';
 
 export default class DashboardUsersController extends Controller {
   @service pocketbase;
+  @service router;
   @tracked users = [];
   @tracked isModalOpen = false;
 
@@ -29,5 +30,10 @@ export default class DashboardUsersController extends Controller {
     } catch (error) {
       console.error('Failed to create user:', error);
     }
+  }
+
+  @action
+  viewUser(userId) {
+    this.router.transitionTo('dashboard.users.view', userId);
   }
 } 
