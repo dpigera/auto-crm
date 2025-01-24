@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { getOwner } from '@ember/application';
 
 export default class DashboardTicketsViewController extends Controller {
   @service router;
@@ -13,6 +14,11 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked subjectDraft = '';
   @tracked users = [];
   @tracked requesterDetails = null;
+
+  async refreshTicketsList() {
+    const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
+    await ticketsController.fetchTickets();
+  }
 
   async fetchUsers() {
     try {
@@ -53,6 +59,7 @@ export default class DashboardTicketsViewController extends Controller {
       });
       // Refresh the model to show updated data
       this.model.priority = newPriority;
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update priority:', error);
     }
@@ -78,6 +85,7 @@ export default class DashboardTicketsViewController extends Controller {
       this.model.description = this.descriptionDraft;
       this.isEditingDescription = false;
       this.reloadData();
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update description:', error);
     }
@@ -109,6 +117,7 @@ export default class DashboardTicketsViewController extends Controller {
       this.model.subject = this.subjectDraft;
       this.isEditingSubject = false;
       this.reloadData();
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update subject:', error);
     }
@@ -128,6 +137,7 @@ export default class DashboardTicketsViewController extends Controller {
         status: newStatus
       });
       this.ticket = updatedTicket;
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update status:', error);
     }
@@ -142,6 +152,7 @@ export default class DashboardTicketsViewController extends Controller {
       });
       this.ticket = updatedTicket;
       await this.fetchRequesterDetails();
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update assignee:', error);
     }
@@ -158,6 +169,7 @@ export default class DashboardTicketsViewController extends Controller {
       
       // Fetch and update requester details
       await this.fetchRequesterDetails();
+      await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update requester:', error);
     }
