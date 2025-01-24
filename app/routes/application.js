@@ -4,9 +4,12 @@ import { inject as service } from '@ember/service';
 export default class ApplicationRoute extends Route {
   @service session;
   @service router;
+  @service pocketbase;
 
   async beforeModel() {
     await this.session.setup();
+    
+    
 
     // If user is authenticated and trying to access the root or login route,
     // redirect them to dashboard

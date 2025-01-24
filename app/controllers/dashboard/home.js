@@ -12,12 +12,12 @@ export default class DashboardHomeController extends Controller {
   }
 
   async fetchDashboardData() {
-    try {
-      const tickets = await this.pocketbase.getTickets();
-      this.openTickets = tickets.filter(ticket => ticket.status === 'open').length;
-    } catch (error) {
-      console.error('Failed to fetch dashboard data:', error);
-      this.openTickets = 0;
-    }
+    // try {
+    //   const tickets = await this.pocketbase.getTickets();
+    //   this.openTickets = tickets.filter(ticket => ticket.status === 'open').length;
+    // } catch (error) {
+    //   console.error('Failed to fetch dashboard data:', error);
+    //   this.openTickets = 0;
+    // }
   }
 } 

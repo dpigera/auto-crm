@@ -38,13 +38,11 @@ export default class PocketbaseService extends Service {
   }
 
   async getUsers() {
-    await this.authSuperUser();
     const users = await this.client.collection('users').getFullList();
     return users;
   }
 
   async getUser(userId) {
-    await this.authSuperUser();
     const user = await this.client.collection('users').getOne(userId);
     return user;
   }
@@ -62,7 +60,7 @@ export default class PocketbaseService extends Service {
   }
 
   async register({ email, password, passwordConfirm, firstName, lastName }) {
-    await this.authSuperUser();
+    
 
     try {
       const name = `${firstName} ${lastName}`;
@@ -102,7 +100,7 @@ export default class PocketbaseService extends Service {
     try {
       const tickets = await this.client.collection('tickets').getFullList({
         sort: '-created',
-        expand: 'requester'
+        $autoCancel: false,
       });
       return tickets;
     } catch (error) {

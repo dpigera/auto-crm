@@ -13,12 +13,13 @@ export default class DashboardUsersController extends Controller {
   }
 
   async fetchUsers() {
-    try {
-      const users = await this.pocketbase.getUsers();
-      this.users = users;
-    } catch (error) {
-      console.error('Failed to fetch users:', error);
-      this.users = [];
-    }
+    // try {
+    //   const users = await this.pocketbase.getUsers();
+    //   this.users = users;
+    // } catch (error) {
+    //   console.error('Failed to fetch users:', error);
+    //   this.users = [];
+    // }
+    this.users = [];
   }
 } 

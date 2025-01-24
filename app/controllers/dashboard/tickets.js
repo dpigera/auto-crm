@@ -23,6 +23,7 @@ export default class DashboardTicketsController extends Controller {
       console.error('Failed to fetch tickets:', error);
       this.tickets = [];
     }
+
   }
 
   @action
