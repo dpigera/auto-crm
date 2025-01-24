@@ -15,6 +15,11 @@ export default class PocketbaseService extends Service {
     return this.currentUser?.name;
   }
 
+  async fetchArticles() {
+    const articles = await this.client.collection('articles').getFullList({sort: '-created', expand: 'author'});
+    return articles;
+  }
+
   async setMyStatus(status) {
     try {
       const validStatuses = ['active', 'away', 'busy'];

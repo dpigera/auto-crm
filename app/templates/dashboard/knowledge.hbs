@@ -1,13 +1,22 @@
 <div class="flex-1 flex">
   {{!-- Ticket Metadata Column --}}
-  <div class="w-96 border-r border-gray-300 bg-white overflow-y-auto">
+  <div class="w-60 border-r border-gray-300 bg-white overflow-y-auto">
     <div class="p-4">
       <div class="flex items-center mb-4">
         <h2 class="text-black text-xl font-semibold">Articles</h2>
       </div>
-      
+
       <div class="space-y-4 text-sm">
-        <div>Content</div>
+        {{#each @model as |article|}}
+          <button 
+            type="button"
+            class="w-full px-2 py-3 text-left hover:bg-gray-200 {{if (eq this.selectedArticle.id article.id) "bg-gray-200"}}"
+            {{on "click" (fn this.selectArticle article)}}
+          >
+            <p class="font-medium text-gray-900">{{article.title}}</p>
+            <p class="text-sm text-gray-500">{{article.caption}}</p>
+          </button>
+        {{/each}}
       </div>
     </div>
   </div>
@@ -15,14 +24,47 @@
   {{!-- Messages Column --}}
   <div class="flex-1 bg-white flex flex-col border-r border-gray-300">
     <div class="p-4 border-b border-gray-300">
-      <div>
-        <div class="relative mb-2">
-            <h1 class="text-xl font-bold pr-8">Article view</h1>
-        </div>
+      <div class="mb-6">
+        <div>content</div>
       </div>
     </div>
+    
     <div class="flex-1 overflow-y-auto p-4">
-      <div class="text-sm">Article content</div>
+      <p class="text-gray-500 italic text-sm">No messages yet</p>
     </div>
   </div>
+
 </div> 
+
+{{!-- <div class="grid grid-cols-4 gap-6 p-4">
+  
+  <div class="col-span-1">
+    <div class="bg-white rounded-lg border border-gray-200">
+      <div class="p-4 border-b border-gray-200">
+        <h2 class="text-lg font-medium">Articles</h2>
+      </div>
+      <div class="divide-y divide-gray-200">
+        
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="col-span-3">
+    <div class="bg-white rounded-lg border border-gray-200 p-6">
+      <h1 class="text-2xl font-bold mb-6">Article View</h1>
+      
+      {{#if this.selectedArticle}}
+        <div class="mb-6">
+          <h2 class="text-xl font-bold mb-2">{{this.selectedArticle.title}}</h2>
+          <p class="text-gray-600 mb-4">{{this.selectedArticle.caption}}</p>
+          <div class="prose max-w-none">
+            {{markdown this.selectedArticle.markdown}}
+          </div>
+        </div>
+      {{else}}
+        <p class="text-gray-500">Select an article to view its content</p>
+      {{/if}}
+    </div>
+  </div>
+</div>  --}}
