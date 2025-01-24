@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 export default class LoginController extends Controller {
   @service session;
   @service router;
+  @service pocketbase;
   
   @tracked errorMessage = null;
   @tracked isLoading = false;
@@ -28,6 +29,7 @@ export default class LoginController extends Controller {
 
       if (this.session.isAuthenticated) {
         // Redirect to dashboard on success
+        await this.pocketbase.authSuperUser();
         await this.router.transitionTo('dashboard.tickets');
       }
     } catch (error) {
