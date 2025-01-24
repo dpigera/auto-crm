@@ -15,5 +15,6 @@ Router.map(function() {
     });
     this.route('knowledge');
     this.route('users');
+    this.route('analytics');
   });
 });
