@@ -11,7 +11,7 @@
 
     {{#each @tickets as |ticket|}}
     <div class="hover:bg-gray-200 cursor-pointer" {{on "click" (fn @onTicketClick ticket.id)}}>
-        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
+        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-1.5 text-sm border-b border-gray-100 items-center">
         <div>
             <TicketStatus @status={{ticket.status}} />
         </div>

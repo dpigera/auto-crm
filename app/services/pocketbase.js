@@ -101,6 +101,7 @@ export default class PocketbaseService extends Service {
     try {
       const tickets = await this.client.collection('tickets').getFullList({
         sort: '-created',
+        expand: 'requester',
         $autoCancel: false,
       });
       return tickets;
