@@ -133,4 +133,17 @@ export default class DashboardTicketsViewController extends Controller {
       console.error('Failed to update assignee:', error);
     }
   }
+
+  @action
+  async updateRequester(event) {
+    try {
+      const newRequester = event.target.value;
+      const updatedTicket = await this.pocketbase.updateTicket(this.ticket.id, {
+        requester: newRequester
+      });
+      this.ticket = updatedTicket;
+    } catch (error) {
+      console.error('Failed to update requester:', error);
+    }
+  }
 } 
