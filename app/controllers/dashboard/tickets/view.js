@@ -97,4 +97,17 @@ export default class DashboardTicketsViewController extends Controller {
     this.isEditingSubject = false;
     this.subjectDraft = '';
   }
+
+  @action
+  async updateStatus(event) {
+    try {
+      const newStatus = event.target.value;
+      const updatedTicket = await this.pocketbase.updateTicket(this.ticket.id, {
+        status: newStatus
+      });
+      this.ticket = updatedTicket;
+    } catch (error) {
+      console.error('Failed to update status:', error);
+    }
+  }
 } 

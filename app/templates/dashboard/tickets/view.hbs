@@ -16,9 +16,18 @@
       </div>
       
       <div class="space-y-4">
-        <div>
-          <div class="text-sm font-medium text-gray-500 mb-1">Status</div>
-          <TicketStatus @status={{this.ticket.status}} />
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Status</label>
+          <select 
+            class="mt-1 text-sm block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            {{on "change" this.updateStatus}}
+          >
+            <option value="open" selected={{eq this.ticket.status "open"}}>Open</option>
+            <option value="in_progress" selected={{eq this.ticket.status "in_progress"}}>In progress</option>
+            <option value="pending" selected={{eq this.ticket.status "pending"}}>Pending</option>
+            <option value="solved" selected={{eq this.ticket.status "solved"}}>Solved</option>
+          </select>
         </div>
 
         <div class="mb-4">
