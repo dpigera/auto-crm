@@ -1,0 +1,27 @@
+<div class="min-w-full p-4">
+    <div class="border-b border-gray-200">
+    <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 pb-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+        <div>Ticket status</div>
+        <div>Subject</div>
+        <div>Requested</div>
+        <div>Updated</div>
+        <div>Priority</div>
+    </div>
+    </div>
+
+    {{#each @tickets as |ticket|}}
+    <div class="hover:bg-gray-200 cursor-pointer" {{on "click" (fn @onTicketClick ticket.id)}}>
+        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
+        <div>
+            <TicketStatus @status={{ticket.status}} />
+        </div>
+        <div class="text-gray-900">{{ticket.subject}}</div>
+        <div class="text-gray-500">{{ticket.expand.requester.name}}</div>
+        <div class="text-gray-500">{{relative-time ticket.updated}}</div>
+        <div>
+            <TicketPriority @priority={{ticket.priority}}/>
+        </div>
+        </div>
+    </div>
+    {{/each}}
+</div>

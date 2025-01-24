@@ -22,19 +22,19 @@ export default class DashboardController extends Controller {
   }
 
   get isKnowledgeRoute() {
-    return this.router.currentRouteName === 'dashboard.knowledge';
+    return this.router.currentRouteName.startsWith('dashboard.knowledge');
   }
 
   get isUsersRoute() {
-    return this.router.currentRouteName === 'dashboard.users';
+    return this.router.currentRouteName.startsWith('dashboard.users');
   }
 
   get isAnalyticsRoute() {
-    return this.router.currentRouteName === 'dashboard.analytics';
+    return this.router.currentRouteName.startsWith('dashboard.analytics');
   }
 
   get isHomeRoute() {
-    return this.router.currentRouteName === 'dashboard.home';
+    return this.router.currentRouteName.startsWith('dashboard.home');
   }
 
   init() {

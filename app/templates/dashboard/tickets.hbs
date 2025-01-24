@@ -1,30 +1,5 @@
 {{outlet}}
 {{#if (eq this.router.currentRouteName 'dashboard.tickets.index')}}
-{{!-- Ticket Meta Info Column --}}
-{{!-- <div class="{{if this.isMobileMenuOpen 'fixed inset-0 z-40 lg:relative' 'hidden lg:block'}} w-60 border-r border-gray-300 bg-white text-white overflow-y-auto">
-  <div class="p-4 pt-6 pl-6">
-    <div class="mb-6 text-sm">
-      <h2 class="text-black text-xl font-semibold mb-4">Views</h2>
-      <div class="border-b border-gray-300 mb-3"></div>
-      <div class="space-y-2">
-        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 bg-gray-200 rounded-md transition-colors">
-          <span>Unresolved tickets</span>
-          <span class="text-gray-500">2</span>
-        </button>
-        
-        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
-          <span>Unassigned tickets</span>
-          <span class="text-gray-500">0</span>
-        </button>
-        
-        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
-          <span>Recently updated tickets</span>
-          <span class="text-gray-500">0</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div> --}}
 
 {{!-- Messages Column --}}
 <div class="flex-1 bg-white flex flex-col">
@@ -32,7 +7,7 @@
     {{!-- Header Section --}}
     <div class="p-4">
       <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-bold">Tickets</h1>
+        <h1 class="text-2xl font-bold">Tickets</h1>
         <button 
           type="button" 
           class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
@@ -52,34 +27,11 @@
       <div class="text-sm text-gray-500 mt-1">{{this.tickets.length}} tickets</div>
     </div>
 
-    {{!-- Table Header --}}
-    <div class="min-w-full p-4">
-      <div class="border-b border-gray-200">
-        <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 pb-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-          <div>Ticket status</div>
-          <div>Subject</div>
-          <div>Requested</div>
-          <div>Updated</div>
-          <div>Priority</div>
-        </div>
-      </div>
-
-      {{#each this.tickets as |ticket|}}
-        <div class="hover:bg-gray-200 cursor-pointer" {{on "click" (fn this.viewTicket ticket.id)}}>
-          <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
-            <div>
-              <TicketStatus @status={{ticket.status}} />
-            </div>
-            <div class="text-gray-900">{{ticket.subject}}</div>
-            <div class="text-gray-500">{{ticket.expand.requester.name}}</div>
-            <div class="text-gray-500">{{relative-time ticket.updated}}</div>
-            <div>
-              <TicketPriority @priority={{ticket.priority}}/>
-            </div>
-          </div>
-        </div>
-      {{/each}}
-    </div>
+    {{!-- Table Component --}}
+    <TicketsTable 
+      @tickets={{this.tickets}} 
+      @onTicketClick={{this.viewTicket}} 
+    />
   </div>
 </div> 
 {{/if}}
