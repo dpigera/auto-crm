@@ -186,4 +186,19 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async createArticle(articleData) {
+    try {
+      const record = await this.client.collection('articles').create({
+        title: articleData.title,
+        caption: articleData.caption,
+        markdown: articleData.markdown,
+        user: articleData.user
+      });
+      return record;
+    } catch (error) {
+      console.error('Failed to create article:', error);
+      throw error;
+    }
+  }
 }

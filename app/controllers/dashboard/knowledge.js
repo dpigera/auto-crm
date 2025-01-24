@@ -17,6 +17,10 @@ export default class DashboardKnowledgeController extends Controller {
     // Future initialization code can go here
   }
 
+  reloadData() {
+
+  }
+
   async fetchUsers() {
     try {
       const records = await this.pocketbase.getUsers();
@@ -38,8 +42,7 @@ export default class DashboardKnowledgeController extends Controller {
     try {
       await this.pocketbase.createArticle(articleData);
       this.isModalOpen = false;
-      // Refresh the articles list
-      this.send('refreshModel');
+      window.location.reload();
     } catch (error) {
       console.error('Failed to create article:', error);
     }
