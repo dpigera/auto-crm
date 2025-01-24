@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default class DashboardKnowledgeController extends Controller {
   @service pocketbase;
@@ -10,4 +11,5 @@ export default class DashboardKnowledgeController extends Controller {
     super(...arguments);
     // Future initialization code can go here
   }
+
 } 
