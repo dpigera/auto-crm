@@ -1,9 +1,16 @@
 <div class="p-4 flex min-w-0">
   {{!-- Left sidebar --}}
   <div class="w-64 flex-shrink-0 mr-6">
-    <div class="bg-white rounded-lg border border-gray-300">
-      <div class="p-4 border-b border-gray-200">
+    <div class="bg-white rounded-lg border border-gray-200">
+      <div class="p-4 border-b border-gray-200 flex justify-between items-center">
         <h2 class="text-lg font-medium">Articles</h2>
+        <button 
+          type="button" 
+          class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1 px-3 rounded-md"
+          {{on "click" this.addArticle}}
+        >
+          Add Article
+        </button>
       </div>
       <div class="divide-y divide-gray-200">
         {{#each @model as |article|}}
