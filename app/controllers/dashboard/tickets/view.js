@@ -12,6 +12,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked isEditingSubject = false;
   @tracked subjectDraft = '';
   @tracked users = [];
+  @tracked requesterDetails = null;
 
   async fetchUsers() {
     try {
@@ -19,6 +20,17 @@ export default class DashboardTicketsViewController extends Controller {
       this.users = records;
     } catch (error) {
       console.error('Failed to fetch users:', error);
+    }
+  }
+
+  async fetchRequesterDetails() {
+    if (this.ticket.requester) {
+      try {
+        const user = await this.pocketbase.getUser(this.ticket.requester);
+        this.requesterDetails = user;
+      } catch (error) {
+        console.error('Failed to fetch requester details:', error);
+      }
     }
   }
 
@@ -129,6 +141,7 @@ export default class DashboardTicketsViewController extends Controller {
         assignee: newAssignee
       });
       this.ticket = updatedTicket;
+      await this.fetchRequesterDetails();
     } catch (error) {
       console.error('Failed to update assignee:', error);
     }
@@ -142,6 +155,9 @@ export default class DashboardTicketsViewController extends Controller {
         requester: newRequester
       });
       this.ticket = updatedTicket;
+      
+      // Fetch and update requester details
+      await this.fetchRequesterDetails();
     } catch (error) {
       console.error('Failed to update requester:', error);
     }

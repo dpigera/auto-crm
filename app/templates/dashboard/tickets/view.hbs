@@ -16,6 +16,19 @@
       </div>
       
       <div class="space-y-4">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Requester</label>
+          <select 
+            class="mt-1 block w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            {{on "change" this.updateRequester}}
+          >
+            {{#each this.users as |user|}}
+              <option value={{user.id}} selected={{eq this.ticket.requester user.id}}>
+                {{user.name}}
+              </option>
+            {{/each}}
+          </select>
+        </div>
         
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700">Assignee</label>
@@ -25,20 +38,6 @@
           >
             {{#each this.users as |user|}}
               <option value={{user.id}} selected={{eq this.ticket.assignee user.id}}>
-                {{user.name}}
-              </option>
-            {{/each}}
-          </select>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700">Requester</label>
-          <select 
-            class="mt-1 block w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-            {{on "change" this.updateRequester}}
-          >
-            {{#each this.users as |user|}}
-              <option value={{user.id}} selected={{eq this.ticket.requester user.id}}>
                 {{user.name}}
               </option>
             {{/each}}
@@ -195,14 +194,13 @@
       <h2 class="text-black text-xl font-semibold mb-4">Requester Info</h2>
       
       <div class="space-y-4">
-        <div>
-          <div class="text-sm font-medium text-gray-500 mb-1">Name</div>
-          <div class="text-sm text-gray-900">{{this.ticket.expand.requester.name}}</div>
-        </div>
-
-        <div>
-          <div class="text-sm font-medium text-gray-500 mb-1">Email</div>
-          <div class="text-sm text-gray-900">{{this.ticket.expand.requester.email}}</div>
+        <div class="mb-4">
+          {{#if this.requesterDetails}}
+            <p class="mt-1 text-sm">Name: {{this.requesterDetails.name}}</p>
+            <p class="mt-1 text-sm">Email: {{this.requesterDetails.email}}</p>
+          {{else}}
+            <p class="mt-1 text-gray-500 text-sm">No requester selected</p>
+          {{/if}}
         </div>
       </div>
     </div>
