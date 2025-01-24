@@ -127,12 +127,11 @@ export default class PocketbaseService extends Service {
         subject: ticketData.subject,
         description: ticketData.description,
         assignee: ticketData.assignee,
-        status: 'open', // Default status for new tickets
+        requester: ticketData.requester,
+        status: 'open',
         created: new Date().toISOString(),
         updated: new Date().toISOString()
       };
-
-      debugger;
 
       const record = await this.client.collection('tickets').create(data);
       return record;

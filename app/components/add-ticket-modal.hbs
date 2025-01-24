@@ -21,6 +21,20 @@
           {{!-- Modal body --}}
           <div class="mt-4 space-y-4">
             <div>
+              <label for="requester" class="block text-sm font-medium text-gray-700">Requester</label>
+              <select 
+                id="requester" 
+                class="mt-1 block w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                {{on "change" this.onRequesterChange}}
+              >
+                <option value="">Select a requester</option>
+                {{#each @users as |user|}}
+                  <option value={{user.id}}>{{user.name}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+            <div>
               <label for="assignee" class="block text-sm font-medium text-gray-700">Assignee</label>
               <select 
                 id="assignee" 
