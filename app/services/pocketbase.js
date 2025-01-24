@@ -167,4 +167,18 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async fetchTicketMessages(ticketId) {
+    try {
+      const records = await this.client.collection('ticketMessages').getList(1, 100, {
+        filter: `ticket = "${ticketId}"`,
+        sort: 'created',
+        expand: 'user'
+      });
+      return records;
+    } catch (error) {
+      console.error('Failed to fetch ticket messages:', error);
+      throw error;
+    }
+  }
 }

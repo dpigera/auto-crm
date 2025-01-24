@@ -13,6 +13,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked isEditingSubject = false;
   @tracked subjectDraft = '';
   @tracked users = [];
+  @tracked ticketMessages = [];
   @tracked requesterDetails = null;
 
   async refreshTicketsList() {
@@ -29,6 +30,7 @@ export default class DashboardTicketsViewController extends Controller {
     }
   }
 
+
   async fetchRequesterDetails() {
     if (this.ticket.requester) {
       try {
@@ -42,7 +44,10 @@ export default class DashboardTicketsViewController extends Controller {
 
   reloadData() {
     this.ticket = null;
-    this.ticket = this.model;
+    this.ticket = this.model.ticket;
+
+    this.ticketMessages = null;
+    this.ticketMessages = this.model.ticketMessages.items;
   }
 
   @action

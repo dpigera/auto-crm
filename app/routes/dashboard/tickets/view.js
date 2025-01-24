@@ -13,6 +13,7 @@ export default class DashboardTicketsViewRoute extends Route {
 
   async model(params) {
     let ticket = await this.pocketbase.getTicket(params.ticket_id);
-    return ticket;
+    let ticketMessages = await this.pocketbase.fetchTicketMessages(params.ticket_id);
+    return { ticket, ticketMessages } ;
   }
 } 
