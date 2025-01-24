@@ -14,5 +14,6 @@ Router.map(function() {
       this.route('view', { path: '/:ticket_id' });
     });
     this.route('knowledge');
+    this.route('users');
   });
 });

@@ -25,6 +25,10 @@ export default class DashboardController extends Controller {
     return this.router.currentRouteName === 'dashboard.knowledge';
   }
 
+  get isUsersRoute() {
+    return this.router.currentRouteName === 'dashboard.users';
+  }
+
   init() {
     super.init(...arguments);
   }

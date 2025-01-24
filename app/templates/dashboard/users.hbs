@@ -1,0 +1,55 @@
+<div class="flex-1 flex">
+  {{!-- Left Sidebar --}}
+  <div class="w-60 border-r border-gray-300 bg-white overflow-y-auto">
+    <div class="p-4">
+      <h2 class="text-lg font-semibold text-gray-900 mb-4">Users</h2>
+      <div class="border-b border-gray-200 mb-4"></div>
+      
+      {{!-- User filters/search will go here --}}
+      <div class="space-y-2">
+        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
+          <span>All Users</span>
+          <span class="text-gray-500">{{this.users.length}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Main Content Area --}}
+  <div class="flex-1 bg-white flex flex-col">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-semibold text-gray-900">Team Members</h1>
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+          Add User
+        </button>
+      </div>
+      
+      {{#if this.users.length}}
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+          <ul class="divide-y divide-gray-200">
+            {{#each this.users as |user|}}
+              <li class="px-6 py-4 hover:bg-gray-50">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white">
+                      {{initials user.name}}
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">{{user.name}}</div>
+                    <div class="text-sm text-gray-500">{{user.email}}</div>
+                  </div>
+                </div>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      {{else}}
+        <div class="text-center text-gray-500 mt-8">
+          No users found
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div> 
