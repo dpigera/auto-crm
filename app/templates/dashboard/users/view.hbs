@@ -1,33 +1,58 @@
-<div class="p-4">
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="text-xl font-bold">User Details</h1>
+
+
+<div class="flex-1 flex">
+  {{!-- Ticket Metadata Column --}}
+  <div class="w-60 border-r border-gray-300 bg-white overflow-y-auto">
+    <div class="p-4">
+      <div class="flex items-center mb-4">
+        <button 
+          type="button" 
+          class="mr-3 text-gray-500 hover:text-gray-700"
+          {{on "click" this.goBack}}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <h2 class="text-black text-xl font-semibold">User info</h2>
+      </div>
+      
+      <div class="space-y-4">
+        {{#if this.user}}  
+            <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Name</label>
+              <p class="mt-1 text-sm text-gray-900">{{this.user.name}}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Email</label>
+              <p class="mt-1 text-sm text-gray-900">{{this.user.email}}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Created</label>
+              <p class="mt-1 text-sm text-gray-900">{{this.user.created}}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Verified</label>
+              <p class="mt-1 text-sm text-gray-900">{{if this.user.verified "Yes" "No"}}</p>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+    </div>
   </div>
 
-  {{#if this.user}}
-    <div class="bg-white rounded-lg border border-gray-200 p-6">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Name</label>
-          <p class="mt-1 text-sm text-gray-900">{{this.user.name}}</p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <p class="mt-1 text-sm text-gray-900">{{this.user.email}}</p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Created</label>
-          <p class="mt-1 text-sm text-gray-900">{{this.user.created}}</p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Verified</label>
-          <p class="mt-1 text-sm text-gray-900">{{if this.user.verified "Yes" "No"}}</p>
+  {{!-- Messages Column --}}
+  <div class="flex-1 bg-white flex flex-col border-r border-gray-300">
+    <div class="p-4 border-b border-gray-300">
+      <div>
+        <div class="relative mb-2">
+            <h1 class="text-xl font-bold pr-8">User Tickets</h1>
         </div>
       </div>
     </div>
-  {{else}}
-    <p class="text-gray-500">User not found.</p>
-  {{/if}}
+    <div class="flex-1 overflow-y-auto p-4">
+      <div class="text-sm text-gray-500 italic">No messages yet</div>
+    </div>
+  </div>
 </div> 
