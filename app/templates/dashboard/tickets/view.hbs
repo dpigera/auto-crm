@@ -51,7 +51,53 @@
   <div class="flex-1 bg-white flex flex-col border-r border-gray-300">
     <div class="p-4 border-b border-gray-300">
       <h1 class="text-lg font-semibold text-gray-900">{{this.ticket.subject}}</h1>
-      <p class="text-sm text-gray-500">{{this.ticket.description}}</p>
+      <div class="mb-6">
+        <div class="relative">
+          {{#if this.isEditingDescription}}
+            <div class="relative">
+              <textarea 
+                class="w-full text-sm p-2 border rounded-md focus:border-blue-500 focus:ring-blue-500"
+                rows="4"
+                {{on "input" this.updateDescriptionDraft}}
+              >{{this.descriptionDraft}}</textarea>
+              
+              <div class="absolute bottom-2 right-2 space-x-2">
+                <button 
+                  type="button" 
+                  class="text-green-600 hover:text-green-700"
+                  {{on "click" this.saveDescription}}
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </button>
+                <button 
+                  type="button" 
+                  class="text-red-600 hover:text-red-700"
+                  {{on "click" this.cancelEditDescription}}
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          {{else}}
+            <div class="relative">
+              <p class="text-gray-700 text-sm whitespace-pre-wrap pr-8">{{this.ticket.description}}</p>
+              <button 
+                type="button" 
+                class="absolute top-0 right-0 text-gray-500 hover:text-gray-700"
+                {{on "click" this.startEditDescription}}
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+            </div>
+          {{/if}}
+        </div>
+      </div>
     </div>
     
     <div class="flex-1 overflow-y-auto p-4">
