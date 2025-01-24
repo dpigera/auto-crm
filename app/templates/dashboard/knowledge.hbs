@@ -1,23 +1,15 @@
-<div class="flex-1 flex">
-  {{!-- Ticket Metadata Column --}}
-  <div class="w-96 border-r border-gray-300 bg-white overflow-y-auto">
-    <div class="p-4">
-      <div class="flex items-center mb-4 justify-between items-center">
-        <h2 class="text-black text-xl font-semibold">Articles</h2>
-        <button 
-          type="button" 
-          class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded-md"
-          {{on "click" this.addArticle}}
-        >
-          Add Article
-        </button>
+<div class="p-4 flex min-w-0">
+  {{!-- Left sidebar --}}
+  <div class="w-64 flex-shrink-0 mr-6">
+    <div class="bg-white rounded-lg border border-gray-300">
+      <div class="p-4 border-b border-gray-200">
+        <h2 class="text-lg font-medium">Articles</h2>
       </div>
-
-      <div class="space-y-4 text-sm">
+      <div class="divide-y divide-gray-200">
         {{#each @model as |article|}}
           <button 
             type="button"
-            class="w-full px-2 py-3 text-left hover:bg-gray-200 {{if (eq this.selectedArticle.id article.id) "bg-gray-200 rounded-md"}}"
+            class="w-full px-4 py-3 text-left hover:bg-gray-50 {{if (eq this.selectedArticle.id article.id) "bg-gray-200"}}"
             {{on "click" (fn this.selectArticle article)}}
           >
             <p class="font-medium text-gray-900">{{article.title}}</p>
@@ -28,23 +20,59 @@
     </div>
   </div>
 
-  {{!-- Messages Column --}}
-  <div class="flex-1 bg-white flex flex-col border-r border-gray-300">
-    <div class="p-4 border-b border-gray-300">
-      <div class="">
-        {{#if this.selectedArticle}}
-            <h1 class="text-xl font-bold mb-4">{{this.selectedArticle.title}}</h1>
-            <p class="text-gray-600 text-sm">{{this.selectedArticle.caption}}</p>
-        {{else}}
-            <p class="text-gray-500 italic text-sm">No article selected</p>
-        {{/if}}
-      </div>
-    </div>
-    <div class="flex-1 overflow-y-auto p-4 text-sm">
-      {{markdown this.selectedArticle.markdown}}
+  {{!-- Right content --}}
+  <div class="flex-1 min-w-0">
+    <div class="bg-white rounded-lg border border-gray-300 p-6">
+      {{#if this.selectedArticle}}
+        <div class="text-xl font-bold">{{this.selectedArticle.title}}</div>
+        <div class="text-sm text-black mb-6">{{this.selectedArticle.caption}}</div>
+        <div class="mb-6">
+          {{#if this.isEditingContent}}
+            <div class="space-y-4">
+              <textarea 
+                class="w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[400px]"
+                {{on "input" this.updateContentDraft}}
+              >{{this.contentDraft}}</textarea>
+              
+              <div class="flex justify-end space-x-2">
+                <button 
+                  type="button" 
+                  class="bg-blue-600 text-sm hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+                  {{on "click" this.saveContent}}
+                >
+                  Save
+                </button>
+                <button 
+                  type="button" 
+                  class="bg-white text-sm text-gray-700 font-medium py-2 px-4 rounded-md border border-gray-300 hover:bg-gray-50"
+                  {{on "click" this.cancelEditContent}}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          {{else}}
+            <div class="prose max-w-none mb-4 text-sm">
+              {{markdown this.selectedArticle.markdown}}
+            </div>
+            <button     
+              type="button"
+              class="text-blue-600 text-sm hover:text-blue-700 font-medium flex items-center"
+              {{on "click" this.startEditContent}}
+            >
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              Edit
+            </button>
+          {{/if}}
+        </div>
+      {{else}}
+        <p class="text-gray-500 text-sm italic">Select an article to view its content</p>
+      {{/if}}
     </div>
   </div>
-</div> 
+</div>
 
 <AddArticleModal 
   @isOpen={{this.isModalOpen}}

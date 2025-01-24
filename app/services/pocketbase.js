@@ -215,4 +215,14 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async updateArticle(articleId, updateData) {
+    try {
+      const record = await this.client.collection('articles').update(articleId, updateData);
+      return record;
+    } catch (error) {
+      console.error('Failed to update article:', error);
+      throw error;
+    }
+  }
 }

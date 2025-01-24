@@ -11,6 +11,8 @@ export default class DashboardKnowledgeController extends Controller {
   @tracked titleDraft = '';
   @tracked isModalOpen = false;
   @tracked users = [];
+  @tracked isEditingContent = false;
+  @tracked contentDraft = '';
 
   constructor() {
     super(...arguments);
@@ -51,5 +53,35 @@ export default class DashboardKnowledgeController extends Controller {
   @action
   selectArticle(article) {
     this.selectedArticle = article;
+  }
+
+  @action
+  startEditContent() {
+    this.contentDraft = this.selectedArticle.markdown;
+    this.isEditingContent = true;
+  }
+
+  @action
+  updateContentDraft(event) {
+    this.contentDraft = event.target.value;
+  }
+
+  @action
+  async saveContent() {
+    try {
+      const updatedArticle = await this.pocketbase.updateArticle(this.selectedArticle.id, {
+        markdown: this.contentDraft
+      });
+      this.selectedArticle = updatedArticle;
+      this.isEditingContent = false;
+    } catch (error) {
+      console.error('Failed to update article content:', error);
+    }
+  }
+
+  @action
+  cancelEditContent() {
+    this.isEditingContent = false;
+    this.contentDraft = '';
   }
 } 
