@@ -1,0 +1,35 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+
+export default class AddTicketModalComponent extends Component {
+  @tracked assignee = '';
+  @tracked subject = '';
+  @tracked description = '';
+
+  @action
+  onAssigneeChange(event) {
+    this.assignee = event.target.value;
+  }
+
+  @action
+  onSubjectChange(event) {
+    this.subject = event.target.value;
+  }
+
+  @action
+  onDescriptionChange(event) {
+    this.description = event.target.value;
+  }
+
+  @action
+  onSave() {
+    if (this.args.onSave) {
+      this.args.onSave({
+        assignee: this.assignee,
+        subject: this.subject,
+        description: this.description
+      });
+    }
+  }
+} 

@@ -8,7 +8,7 @@ export default class DashboardTicketsController extends Controller {
   @service router;
   @tracked isMobileMenuOpen = false;
   @tracked tickets = [];
-
+  @tracked isModalOpen = false;
 
   constructor() {
     super(...arguments);
@@ -23,12 +23,22 @@ export default class DashboardTicketsController extends Controller {
       console.error('Failed to fetch tickets:', error);
       this.tickets = [];
     }
-
   }
 
   @action
   viewTicket(ticketId) {
     this.router.transitionTo('dashboard.tickets.view', ticketId);
+  }
+
+  @action
+  async saveTicket(ticketData) {
+    try {
+      // Add your save logic here
+      // await this.store.createRecord('ticket', ticketData).save();
+      this.isModalOpen = false;
+    } catch (error) {
+      console.error('Failed to save ticket:', error);
+    }
   }
 
   // ... any other tickets-specific controller code ...
