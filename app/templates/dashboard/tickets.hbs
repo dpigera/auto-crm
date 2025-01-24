@@ -51,29 +51,13 @@
         <div class="hover:bg-gray-200 cursor-pointer" {{on "click" (fn this.viewTicket ticket.id)}}>
           <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] gap-4 py-2.5 text-sm border-b border-gray-100 items-center">
             <div>
-              <div class="text-center items-center text-white px-3 py-1 rounded-md text-sm font-bold 
-                {{if (eq ticket.status 'open') 'bg-red-700'}}
-                {{if (eq ticket.status 'in_progress') 'bg-orange-700'}}
-                {{if (eq ticket.status 'pending') 'bg-yellow-700'}}
-                {{if (eq ticket.status 'solved') 'bg-green-700'}}">
-                {{#if (eq ticket.status 'in_progress')}}
-                  In Progress
-                {{else}}
-                  {{capitalize ticket.status}}
-                {{/if}}
-              </div>
+              <TicketStatus @status={{ticket.status}} />
             </div>
             <div class="text-gray-900">{{ticket.subject}}</div>
             <div class="text-gray-500">{{ticket.expand.requester.name}}</div>
             <div class="text-gray-500">{{relative-time ticket.updated}}</div>
             <div>
-              <div class="inline-flex items-center py-0.5 rounded-md text-sm font-medium
-                {{if (eq ticket.priority 'urgent') ''}}
-                {{if (eq ticket.priority 'high') ''}}
-                {{if (eq ticket.priority 'normal') ''}}
-                {{if (eq ticket.priority 'low') ''}}">
-                {{capitalize ticket.priority}}
-              </div>
+              <TicketPriority @priority={{ticket.priority}}/>
             </div>
           </div>
         </div>

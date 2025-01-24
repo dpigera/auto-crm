@@ -1,0 +1,7 @@
+<div class="inline-flex items-center py-0.5 rounded-md text-sm font-medium
+    {{if (eq @priority 'urgent') ''}}
+    {{if (eq @priority 'high') ''}}
+    {{if (eq @priority 'normal') ''}}
+    {{if (eq @priority 'low') ''}}">
+    {{capitalize @priority}}
+</div>

@@ -18,28 +18,12 @@
       <div class="space-y-4">
         <div>
           <div class="text-sm font-medium text-gray-500 mb-1">Status</div>
-          <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium 
-            {{if (eq this.ticket.status 'open') 'bg-red-100 text-red-800'}}
-            {{if (eq this.ticket.status 'in_progress') 'bg-orange-100 text-orange-800'}}
-            {{if (eq this.ticket.status 'pending') 'bg-yellow-100 text-yellow-800'}}
-            {{if (eq this.ticket.status 'solved') 'bg-green-100 text-green-800'}}">
-            {{#if (eq this.ticket.status 'in_progress')}}
-              In Progress
-            {{else}}
-              {{capitalize this.ticket.status}}
-            {{/if}}
-          </span>
+          <TicketStatus @status={{this.ticket.status}} />
         </div>
 
         <div>
           <div class="text-sm font-medium text-gray-500 mb-1">Priority</div>
-          <span class="inline-flex items-center px-3 py-0.5 rounded-md text-sm font-medium
-            {{if (eq this.ticket.priority 'urgent') 'bg-red-100 text-red-800'}}
-            {{if (eq this.ticket.priority 'high') 'bg-orange-100 text-orange-800'}}
-            {{if (eq this.ticket.priority 'normal') 'bg-yellow-100 text-yellow-800'}}
-            {{if (eq this.ticket.priority 'low') 'bg-green-100 text-green-800'}}">
-            {{capitalize this.ticket.priority}}
-          </span>
+          <TicketPriority @priority={{this.ticket.priority}}/>
         </div>
 
         <div>
