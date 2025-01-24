@@ -4,17 +4,23 @@
     {{!-- Header Section --}}
     <div class="p-4">
       <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-bold">Users</h1>
+        <h1 class="text-2xl font-bold">Users</h1>
         <button 
           type="button" 
-          class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md text-sm"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
+          {{on "click" (fn (mut this.isModalOpen) true)}}
         >
           Add User
         </button>
       </div>
 
+      <AddUserModal 
+        @isOpen={{this.isModalOpen}}
+        @onClose={{fn (mut this.isModalOpen) false}}
+        @onSave={{this.saveUser}}
+      />
 
-      <div class="text-sm text-gray-500 mt-1">{{@model.length}} user(s)</div>
+      <div class="text-sm text-gray-500 mt-1">{{this.users.length}} user(s)</div>
     </div>
 
     {{!-- Table Header --}}
@@ -28,7 +34,7 @@
         </div>
       </div>
 
-      {{#each @model as |user|}}
+      {{#each this.users as |user|}}
         <div class="hover:bg-gray-200 cursor-pointer">
           <div class="grid grid-cols-[minmax(120px,auto)_1fr_120px_100px_100px] py-2 gap-4 text-sm border-b border-gray-100 items-center">
             <div class="text-gray-900">{{user.name}}</div>

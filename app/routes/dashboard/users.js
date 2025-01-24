@@ -4,13 +4,12 @@ import { service } from '@ember/service';
 export default class DashboardUsersRoute extends Route {
   @service pocketbase;
 
-  async model() {
-    try {
-      const records = await this.pocketbase.getUsers();
-      return records;
-    } catch (error) {
-      console.error('Failed to fetch users:', error);
-      return [];
-    }
+  async beforeModel() {
+    await this.controller?.fetchUsers();
+  }
+
+  setupController(controller) {
+    super.setupController(...arguments);
+    controller.fetchUsers();
   }
 } 
