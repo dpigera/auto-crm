@@ -10,7 +10,7 @@
         {{#each @model as |article|}}
           <button 
             type="button"
-            class="w-full px-2 py-3 text-left hover:bg-gray-200 {{if (eq this.selectedArticle.id article.id) "bg-gray-200"}}"
+            class="w-full px-2 py-3 text-left hover:bg-gray-200 {{if (eq this.selectedArticle.id article.id) "bg-gray-200 rounded-md"}}"
             {{on "click" (fn this.selectArticle article)}}
           >
             <p class="font-medium text-gray-900">{{article.title}}</p>
