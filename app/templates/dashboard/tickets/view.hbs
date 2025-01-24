@@ -21,9 +21,17 @@
           <TicketStatus @status={{this.ticket.status}} />
         </div>
 
-        <div>
-          <div class="text-sm font-medium text-gray-500 mb-1">Priority</div>
-          <TicketPriority @priority={{this.ticket.priority}}/>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">Priority</label>
+          <select 
+            class="mt-1 block w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            {{on "change" this.updatePriority}}
+          >
+            <option value="low" selected={{eq this.ticket.priority "low"}}>Low</option>
+            <option value="normal" selected={{eq this.ticket.priority "normal"}}>Normal</option>
+            <option value="high" selected={{eq this.ticket.priority "high"}}>High</option>
+            <option value="urgent" selected={{eq this.ticket.priority "urgent"}}>Urgent</option>
+          </select>
         </div>
 
         <div>

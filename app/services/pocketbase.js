@@ -141,4 +141,14 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async updateTicket(id, data) {
+    try {
+      const record = await this.client.collection('tickets').update(id, data);
+      return record;
+    } catch (error) {
+      console.error('Failed to update ticket:', error);
+      throw error;
+    }
+  }
 }
