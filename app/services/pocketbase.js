@@ -153,4 +153,18 @@ export default class PocketbaseService extends Service {
       throw error;
     }
   }
+
+  async getTicketsByRequester(userId) {
+    try {
+      const records = await this.client.collection('tickets').getList(1, 50, {
+        filter: `requester = "${userId}"`,
+        sort: '-created',
+        expand: 'assignee,requester'
+      });
+      return records;
+    } catch (error) {
+      console.error('Failed to fetch user tickets:', error);
+      throw error;
+    }
+  }
 }

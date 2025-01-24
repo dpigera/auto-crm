@@ -7,20 +7,24 @@ export default class DashboardUsersViewController extends Controller {
   @service pocketbase;
   @service router;
   @tracked user;
+  @tracked userTickets;
 
   reloadData() {
     this.user = null;
-    this.user = this.model;
+    this.user = this.model.user;
+
+    this.userTickets = null;
+    this.userTickets = this.model.tickets;
   }
 
-  setup(model) {
-    debugger;
-    this.user = model;
+  @action
+  viewTicket(ticketId) {
+    this.router.transitionTo('dashboard.tickets.view', ticketId);
   }
 
 
   @action
   goBack() {
-    this.router.transitionTo('dashboard.users');
+    window.history.back();
   }
 } 

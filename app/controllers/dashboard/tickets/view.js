@@ -47,7 +47,7 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   goBack() {
-    this.router.transitionTo('dashboard.tickets');
+    window.history.back();
   }
 
   @action
