@@ -9,6 +9,8 @@ export default class DashboardTicketsViewController extends Controller {
   @service pocketbase;
   @tracked isEditingDescription = false;
   @tracked descriptionDraft = '';
+  @tracked isEditingSubject = false;
+  @tracked subjectDraft = '';
 
   reloadData() {
     this.ticket = null;
@@ -63,5 +65,36 @@ export default class DashboardTicketsViewController extends Controller {
   cancelEditDescription() {
     this.isEditingDescription = false;
     this.descriptionDraft = '';
+  }
+
+  @action
+  startEditSubject() {
+    this.subjectDraft = this.model.subject;
+    this.isEditingSubject = true;
+  }
+
+  @action
+  updateSubjectDraft(event) {
+    this.subjectDraft = event.target.value;
+  }
+
+  @action
+  async saveSubject() {
+    try {
+      await this.pocketbase.updateTicket(this.model.id, {
+        subject: this.subjectDraft
+      });
+      this.model.subject = this.subjectDraft;
+      this.isEditingSubject = false;
+      this.reloadData();
+    } catch (error) {
+      console.error('Failed to update subject:', error);
+    }
+  }
+
+  @action
+  cancelEditSubject() {
+    this.isEditingSubject = false;
+    this.subjectDraft = '';
   }
 } 
