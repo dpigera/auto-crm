@@ -34,9 +34,10 @@ export default class DashboardTicketsController extends Controller {
   @action
   async saveTicket(ticketData) {
     try {
-      await this.pocketbase.createTicket(ticketData);
+      const newTicket = await this.pocketbase.createTicket(ticketData);
       this.isModalOpen = false;
       await this.fetchTickets();
+      await this.router.transitionTo('dashboard.tickets.view', newTicket.id);
     } catch (error) {
       console.error('Failed to save ticket:', error);
     }

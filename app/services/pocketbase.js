@@ -129,6 +129,7 @@ export default class PocketbaseService extends Service {
         assignee: ticketData.assignee,
         requester: ticketData.requester,
         status: 'open',
+        priority: 'normal',
         created: new Date().toISOString(),
         updated: new Date().toISOString()
       };
