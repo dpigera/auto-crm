@@ -1,8 +1,150 @@
-<div class="flex-1 flex">
-  {{!-- Left Sidebar --}}
-  <div class="w-60 bg-white overflow-y-auto">
-    <div class="p-4">
-      <h2 class="text-black text-xl font-semibold mb-4">Reporting</h2>
+<div class="p-4">
+  <h1 class="text-xl font-bold mb-6">Platform Analytics</h1>
+
+  {{!-- Top row stats --}}
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h3 class="text-sm font-medium text-gray-500 uppercase">Total Tickets</h3>
+      <p class="mt-2 text-3xl font-bold text-gray-900">127</p>
+      <p class="mt-1 text-sm text-green-600">↑ 12% from last month</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h3 class="text-sm font-medium text-gray-500 uppercase">Active Users</h3>
+      <p class="mt-2 text-3xl font-bold text-gray-900">843</p>
+      <p class="mt-1 text-sm text-green-600">↑ 8% from last month</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h3 class="text-sm font-medium text-gray-500 uppercase">Knowledge Articles</h3>
+      <p class="mt-2 text-3xl font-bold text-gray-900">56</p>
+      <p class="mt-1 text-sm text-green-600">↑ 15% from last month</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h3 class="text-sm font-medium text-gray-500 uppercase">Avg Response Time</h3>
+      <p class="mt-2 text-3xl font-bold text-gray-900">2.4h</p>
+      <p class="mt-1 text-sm text-red-600">↓ 5% from last month</p>
+    </div>
+  </div>
+
+  {{!-- Middle row - Ticket Analytics --}}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium mb-4">Ticket Status Distribution</h2>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="text-sm font-medium text-gray-700">Open</span>
+            <span class="text-sm font-medium text-gray-700">45%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full" style="width: 45%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="text-sm font-medium text-gray-700">In Progress</span>
+            <span class="text-sm font-medium text-gray-700">30%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-yellow-500 h-2 rounded-full" style="width: 30%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1">
+            <span class="text-sm font-medium text-gray-700">Resolved</span>
+            <span class="text-sm font-medium text-gray-700">25%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-green-500 h-2 rounded-full" style="width: 25%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium mb-4">Popular Knowledge Articles</h2>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700">Getting Started Guide</span>
+          <span class="text-sm font-medium text-gray-900">2.4k views</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700">API Documentation</span>
+          <span class="text-sm font-medium text-gray-900">1.8k views</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700">Troubleshooting Guide</span>
+          <span class="text-sm font-medium text-gray-900">1.2k views</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700">Security Best Practices</span>
+          <span class="text-sm font-medium text-gray-900">980 views</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Bottom row - User Activity --}}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium mb-4">Top Support Agents</h2>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+              <span class="text-sm font-medium">JD</span>
+            </div>
+            <span class="ml-3 text-sm text-gray-900">John Doe</span>
+          </div>
+          <span class="text-sm font-medium text-gray-900">48 tickets resolved</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+              <span class="text-sm font-medium">JS</span>
+            </div>
+            <span class="ml-3 text-sm text-gray-900">Jane Smith</span>
+          </div>
+          <span class="text-sm font-medium text-gray-900">42 tickets resolved</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+              <span class="text-sm font-medium">RJ</span>
+            </div>
+            <span class="ml-3 text-sm text-gray-900">Robert Johnson</span>
+          </div>
+          <span class="text-sm font-medium text-gray-900">35 tickets resolved</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border border-gray-200">
+      <h2 class="text-lg font-medium mb-4">Recent Activity</h2>
+      <div class="space-y-4">
+        <div class="flex items-center text-sm">
+          <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+          <span class="text-gray-700">New ticket created by Sarah Wilson</span>
+          <span class="ml-auto text-gray-500">2m ago</span>
+        </div>
+        <div class="flex items-center text-sm">
+          <div class="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+          <span class="text-gray-700">Knowledge article updated by Admin</span>
+          <span class="ml-auto text-gray-500">15m ago</span>
+        </div>
+        <div class="flex items-center text-sm">
+          <div class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+          <span class="text-gray-700">Ticket #123 assigned to John Doe</span>
+          <span class="ml-auto text-gray-500">1h ago</span>
+        </div>
+        <div class="flex items-center text-sm">
+          <div class="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+          <span class="text-gray-700">New user registration: Mike Brown</span>
+          <span class="ml-auto text-gray-500">2h ago</span>
+        </div>
+      </div>
     </div>
   </div>
 </div> 
