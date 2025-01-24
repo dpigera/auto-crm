@@ -1,0 +1,54 @@
+<div class="flex-1 flex">
+  {{!-- Left Sidebar --}}
+  <div class="w-60 border-r border-gray-300 bg-white overflow-y-auto">
+    <div class="p-4">
+      <h2 class="text-black text-xl font-semibold mb-4">Dashboard</h2>
+      <div class="border-b border-gray-200 mb-4"></div>
+      
+      <div class="space-y-2">
+        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
+          <span>Overview</span>
+        </button>
+        <button class="w-full flex items-center justify-between py-2 px-4 text-gray-700 hover:bg-gray-200 rounded-md transition-colors">
+          <span>My Tasks</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Main Content Area --}}
+  <div class="flex-1 bg-white flex flex-col">
+    <div class="p-6">
+      <div class="mb-6">
+        <h1 class="text-black text-xl font-semibold">Welcome back, {{this.pocketbase.currentUser.name}}</h1>
+        <p class="text-sm text-gray-500 mt-1">Here's what's happening today</p>
+      </div>
+
+      {{!-- Quick Stats --}}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
+          <h3 class="text-sm font-medium text-gray-500">My Open Tickets</h3>
+          <p class="text-3xl font-semibold text-gray-900 mt-2">{{this.openTickets}}</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
+          <h3 class="text-sm font-medium text-gray-500">Due Today</h3>
+          <p class="text-3xl font-semibold text-gray-900 mt-2">3</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
+          <h3 class="text-sm font-medium text-gray-500">Resolved This Week</h3>
+          <p class="text-3xl font-semibold text-gray-900 mt-2">12</p>
+        </div>
+      </div>
+
+      {{!-- Recent Activity --}}
+      <div class="bg-white p-6 rounded-lg shadow border border-gray-200">
+        <h3 class="text-black text-xl font-semibold mb-4">Recent Activity</h3>
+        <div class="text-sm text-gray-500">
+          No recent activity
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
