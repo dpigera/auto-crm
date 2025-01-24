@@ -13,5 +13,6 @@ Router.map(function() {
     this.route('tickets', function() {
       this.route('view', { path: '/:ticket_id' });
     });
+    this.route('knowledge');
   });
 });
