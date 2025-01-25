@@ -18,9 +18,11 @@ export default class DashboardTicketsController extends Controller {
 
   async fetchTickets() {
     try {
+      await this.pocketbase.authSuperUser();
       const tickets = await this.pocketbase.getTickets();
       this.tickets = tickets;
     } catch (error) {
+      window.location.reload();
       console.error('Failed to fetch tickets:', error);
       this.tickets = [];
     }
