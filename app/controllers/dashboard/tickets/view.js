@@ -105,7 +105,6 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   startEditSubject() {
-    debugger;
     this.subjectDraft = this.model.ticket.subject;
     this.isEditingSubject = true;
   }
@@ -195,7 +194,6 @@ export default class DashboardTicketsViewController extends Controller {
 
     try {
       const currentUser = this.pocketbase.currentUser
-      debugger;
       await this.pocketbase.createTicketMessage({
         message: this.messageDraft,
         ticketId: this.ticket.id,
@@ -208,7 +206,6 @@ export default class DashboardTicketsViewController extends Controller {
       // Refresh the messages list
       const messages = await this.pocketbase.fetchTicketMessages(this.ticket.id);
       this.ticketMessages = messages.items;
-      debugger;
     } catch (error) {
       console.error('Failed to post message:', error);
     }
