@@ -60,7 +60,7 @@ export default class DashboardTicketsViewController extends Controller {
   async updatePriority(event) {
     try {
       const newPriority = event.target.value;
-      await this.pocketbase.updateTicket(this.model.id, {
+      await this.pocketbase.updateTicket(this.model.ticket.id, {
         priority: newPriority
       });
       // Refresh the model to show updated data
@@ -73,7 +73,7 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   startEditDescription() {
-    this.descriptionDraft = this.model.description;
+    this.descriptionDraft = this.model.ticket.description;
     this.isEditingDescription = true;
   }
 
@@ -85,10 +85,10 @@ export default class DashboardTicketsViewController extends Controller {
   @action
   async saveDescription() {
     try {
-      await this.pocketbase.updateTicket(this.model.id, {
+      await this.pocketbase.updateTicket(this.model.ticket.id, {
         description: this.descriptionDraft
       });
-      this.model.description = this.descriptionDraft;
+      this.model.ticket.description = this.descriptionDraft;
       this.isEditingDescription = false;
       this.reloadData();
       await this.refreshTicketsList();
@@ -105,7 +105,8 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   startEditSubject() {
-    this.subjectDraft = this.model.subject;
+    debugger;
+    this.subjectDraft = this.model.ticket.subject;
     this.isEditingSubject = true;
   }
 
@@ -117,10 +118,10 @@ export default class DashboardTicketsViewController extends Controller {
   @action
   async saveSubject() {
     try {
-      await this.pocketbase.updateTicket(this.model.id, {
+      await this.pocketbase.updateTicket(this.model.ticket.id, {
         subject: this.subjectDraft
       });
-      this.model.subject = this.subjectDraft;
+      this.model.ticket.subject = this.subjectDraft;
       this.isEditingSubject = false;
       this.reloadData();
       await this.refreshTicketsList();
