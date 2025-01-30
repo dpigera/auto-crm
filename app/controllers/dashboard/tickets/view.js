@@ -183,6 +183,15 @@ export default class DashboardTicketsViewController extends Controller {
     }
   }
 
+  @action 
+  async summarizeThread() {
+    debugger;
+  }
+
+  @action personalizedEmail() {
+    debugger;
+  }
+
   @action
   async updateAssignee(event) {
     try {
