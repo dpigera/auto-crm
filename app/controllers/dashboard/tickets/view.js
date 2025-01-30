@@ -138,9 +138,35 @@ export default class DashboardTicketsViewController extends Controller {
   }
 
   @action
+  updateAiMessageDraft(event) {
+    this.aiMessageDraft = event.target.value;
+  }
+
+  @action
+  postAiMessage() {
+    let messages = this.agentMessages;
+    messages.push({
+      username: 'User',
+      timestamp: new Date(),
+      message: this.aiMessageDraft
+    });
+
+    this.agentMessages = [];
+    this.agentMessages = messages;
+
+    this.aiMessageDraft = '';
+  }
+
+
+  @action
   cancelEditSubject() {
     this.isEditingSubject = false;
     this.subjectDraft = '';
+  }
+
+  @action
+  toggleAgent() {
+    this.showAgent = !this.showAgent;
   }
 
   @action
