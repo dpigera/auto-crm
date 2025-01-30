@@ -323,16 +323,16 @@
           
           <div class="space-y-3">
             <textarea 
-              class="w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[100px] resize-none"
+              class="w-full bg-gray-200 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[100px] resize-none"
               placeholder="Ask the AI Agent..."
-              disabled={{this.isLoadingSummary}}
+              disabled={{true}}
               {{on "input" this.updateAiMessageDraft}}
             ></textarea>
             <div class="flex justify-end pb-10">
               <button 
                 type="button" 
-                class="bg-blue-600 text-sm hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
-                disabled={{this.isLoadingSummary}}
+                class="bg-blue-800 text-sm hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+                disabled={{true}}
                 {{on "click" this.postAiMessage}}
               >
                 Post
