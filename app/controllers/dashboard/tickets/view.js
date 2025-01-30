@@ -16,6 +16,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked ticketMessages = [];
   @tracked requesterDetails = null;
   @tracked messageDraft = '';
+  @tracked showAgent = false;
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -209,5 +210,10 @@ export default class DashboardTicketsViewController extends Controller {
     } catch (error) {
       console.error('Failed to post message:', error);
     }
+  }
+
+  @action
+  toggleAgent() {
+    this.showAgent = !this.showAgent;
   }
 } 
