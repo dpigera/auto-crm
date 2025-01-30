@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { getOwner } from '@ember/application';
+import ENV from '../../../config/environment';
 
 export default class DashboardTicketsViewController extends Controller {
   @service router;
@@ -183,9 +184,39 @@ export default class DashboardTicketsViewController extends Controller {
     }
   }
 
-  @action 
+  @action
   async summarizeThread() {
-    debugger;
+    try {
+      const promptApiUrl = ENV.APP.PROMPT_API_URL;
+      const response = await fetch(`${promptApiUrl}/summary`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ticket_id: this.ticket.id
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get summary');
+      }
+
+      const data = await response.json();
+      
+      // Add the summary response to agent messages
+      this.agentMessages = [
+        ...this.agentMessages,
+        {
+          username: 'AutoCRM Agent',
+          timestamp: new Date(),
+          message: data.data.output
+        }
+      ];
+  
+    } catch (error) {
+      console.error('Failed to get thread summary:', error);
+    }
   }
 
   @action personalizedEmail() {

@@ -15,7 +15,7 @@ module.exports = function (environment) {
     APP: {
       PROMPT_API_URL: environment === 'production' 
         ? 'https://autocrm-prompt-server-project2.fly.dev'
-        : 'http://localhost:3000'
+        : 'http://localhost:8080'
     },
   };
 
