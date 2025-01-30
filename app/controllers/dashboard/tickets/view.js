@@ -25,6 +25,7 @@ export default class DashboardTicketsViewController extends Controller {
       message: "Hi, I'm an AI assistant at AutoCRM. I can do things like summarize, search for info, and build emails for you. What can I help you with?"
     }
   ];
+  @tracked isLoadingSummary = false;
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -186,6 +187,10 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   async summarizeThread() {
+    if (this.isLoadingSummary) return;
+    
+    this.isLoadingSummary = true;
+    
     try {
       const promptApiUrl = ENV.APP.PROMPT_API_URL;
       const response = await fetch(`${promptApiUrl}/summary`, {
@@ -216,6 +221,8 @@ export default class DashboardTicketsViewController extends Controller {
   
     } catch (error) {
       console.error('Failed to get thread summary:', error);
+    } finally {
+      this.isLoadingSummary = false;
     }
   }
 
