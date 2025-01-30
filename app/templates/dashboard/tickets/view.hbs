@@ -260,7 +260,7 @@
   {{!-- Right AI Agent column --}}
   {{#if this.showAgent}}
     <div class="w-96 flex-shrink-0">
-      <div class="bg-white">
+      <div class="bg-white flex flex-col h-full">
         <div class="bg-gray-100 p-4 border-b border-gray-300">
           <div class="flex items-center mb-2">
             <img 
@@ -272,8 +272,29 @@
           </div>
           <p class="text-sm text-gray-600">Your AI Agent is now on demand!</p>
         </div>
-        <div class="p-6">
-          {{!-- Rest of AI Agent content will go here --}}
+        
+        <div class="p-6 flex-1 overflow-y-auto">
+          {{!-- AI Agent content here --}}
+        </div>
+        
+        {{!-- Fixed textarea and button at bottom --}}
+        <div class="p-4 border-t border-gray-200 flex-shrink-0">
+          <div class="space-y-3">
+            <textarea 
+              class="w-full text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[100px] resize-none"
+              placeholder="Ask the AI Agent..."
+              {{on "input" this.updateAiMessageDraft}}
+            ></textarea>
+            <div class="flex justify-end">
+              <button 
+                type="button" 
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+                {{on "click" this.postAiMessage}}
+              >
+                Post
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
