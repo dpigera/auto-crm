@@ -26,6 +26,7 @@ export default class DashboardTicketsViewController extends Controller {
     }
   ];
   @tracked isLoadingSummary = false;
+  @tracked isLoadingEmail = false;
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -226,8 +227,43 @@ export default class DashboardTicketsViewController extends Controller {
     }
   }
 
-  @action personalizedEmail() {
-    debugger;
+  @action
+  async personalizedEmail() {
+    if (this.isLoadingEmail) return;
+    
+    this.isLoadingEmail = true;
+    
+    try {
+      const promptApiUrl = ENV.APP.PROMPT_API_URL;
+      const response = await fetch(`${promptApiUrl}/letter`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ticket_id: this.ticket.id
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate email');
+      }
+
+      const data = await response.json();
+      
+      this.agentMessages = [
+        ...this.agentMessages,
+        {
+          username: 'AutoCRM Agent',
+          timestamp: new Date(),
+          message: data.data.output
+        }
+      ];
+    } catch (error) {
+      console.error('Failed to generate personalized email:', error);
+    } finally {
+      this.isLoadingEmail = false;
+    }
   }
 
   @action
