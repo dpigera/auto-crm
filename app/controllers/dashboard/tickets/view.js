@@ -17,6 +17,13 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked requesterDetails = null;
   @tracked messageDraft = '';
   @tracked showAgent = true;
+  @tracked agentMessages = [
+    {
+      username: 'AutoCRM Agent',
+      timestamp: new Date(),
+      message: "Hi, I'm an AI assistant at AutoCRM. I can do things like summarize, search for info, and build emails for you. What can I help you with?"
+    }
+  ];
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -210,10 +217,5 @@ export default class DashboardTicketsViewController extends Controller {
     } catch (error) {
       console.error('Failed to post message:', error);
     }
-  }
-
-  @action
-  toggleAgent() {
-    this.showAgent = !this.showAgent;
   }
 } 

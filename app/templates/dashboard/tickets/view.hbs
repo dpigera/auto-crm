@@ -277,18 +277,18 @@
         {{!-- Scrollable message list --}}
         <div class="flex-1 overflow-y-auto px-4">
           <div class="space-y-4 py-4">
-            {{#each (array 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20) as |message|}}
+            {{#each this.agentMessages as |message|}}
               <div class="flex space-x-3">
                 <div class="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
                   <span class="text-gray-600 font-medium">U</span>
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-center space-x-2">
-                    <span class="font-medium text-sm">User {{message}}</span>
-                    <span class="text-gray-500 text-xs">{{message}}m ago</span>
+                    <span class="font-medium text-sm">{{message.username}}</span>
+                    <span class="text-gray-500 text-xs">{{relative-time message.timestamp}}</span>
                   </div>
                   <p class="text-sm text-gray-700 mt-1">
-                    This is a sample message {{message}} from the AI conversation history.
+                    {{message.message}}
                   </p>
                 </div>
               </div>
