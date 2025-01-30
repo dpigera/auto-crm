@@ -3,6 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { getOwner } from '@ember/application';
+import ENV from '../../../config/environment';
 
 export default class DashboardTicketsViewController extends Controller {
   @service router;
@@ -16,6 +17,16 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked ticketMessages = [];
   @tracked requesterDetails = null;
   @tracked messageDraft = '';
+  @tracked showAgent = true;
+  @tracked agentMessages = [
+    {
+      username: 'AutoCRM Agent',
+      timestamp: new Date(),
+      message: "Hi, I'm an AI assistant at AutoCRM. I can do things like summarize, search for info, and build emails for you. What can I help you with?"
+    }
+  ];
+  @tracked isLoadingSummary = false;
+  @tracked isLoadingEmail = false;
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');
@@ -130,9 +141,35 @@ export default class DashboardTicketsViewController extends Controller {
   }
 
   @action
+  updateAiMessageDraft(event) {
+    this.aiMessageDraft = event.target.value;
+  }
+
+  @action
+  postAiMessage() {
+    let messages = this.agentMessages;
+    messages.push({
+      username: 'User',
+      timestamp: new Date(),
+      message: this.aiMessageDraft
+    });
+
+    this.agentMessages = [];
+    this.agentMessages = messages;
+
+    this.aiMessageDraft = '';
+  }
+
+
+  @action
   cancelEditSubject() {
     this.isEditingSubject = false;
     this.subjectDraft = '';
+  }
+
+  @action
+  toggleAgent() {
+    this.showAgent = !this.showAgent;
   }
 
   @action
@@ -146,6 +183,86 @@ export default class DashboardTicketsViewController extends Controller {
       await this.refreshTicketsList();
     } catch (error) {
       console.error('Failed to update status:', error);
+    }
+  }
+
+  @action
+  async summarizeThread() {
+    if (this.isLoadingSummary) return;
+    
+    this.isLoadingSummary = true;
+    
+    try {
+      const promptApiUrl = ENV.APP.PROMPT_API_URL;
+      const response = await fetch(`${promptApiUrl}/summary`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ticket_id: this.ticket.id
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get summary');
+      }
+
+      const data = await response.json();
+      
+      // Add the summary response to agent messages
+      this.agentMessages = [
+        ...this.agentMessages,
+        {
+          username: 'AutoCRM Agent',
+          timestamp: new Date(),
+          message: data.data.output
+        }
+      ];
+  
+    } catch (error) {
+      console.error('Failed to get thread summary:', error);
+    } finally {
+      this.isLoadingSummary = false;
+    }
+  }
+
+  @action
+  async personalizedEmail() {
+    if (this.isLoadingEmail) return;
+    
+    this.isLoadingEmail = true;
+    
+    try {
+      const promptApiUrl = ENV.APP.PROMPT_API_URL;
+      const response = await fetch(`${promptApiUrl}/letter`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ticket_id: this.ticket.id
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to generate email');
+      }
+
+      const data = await response.json();
+      
+      this.agentMessages = [
+        ...this.agentMessages,
+        {
+          username: 'AutoCRM Agent',
+          timestamp: new Date(),
+          message: data.data.output
+        }
+      ];
+    } catch (error) {
+      console.error('Failed to generate personalized email:', error);
+    } finally {
+      this.isLoadingEmail = false;
     }
   }
 

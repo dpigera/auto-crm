@@ -215,10 +215,20 @@
             value={{this.messageDraft}}
             {{on "input" this.updateMessageDraft}}
           ></textarea>
-          <div class="flex justify-end">
+          <div class="flex justify-end space-x-2">
             <button 
               type="button" 
-              class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+              class="bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium py-2 px-4 rounded-md flex items-center space-x-1"
+              {{on "click" this.toggleAgent}}
+            >
+              <span class="text-sm">{{if this.showAgent "Hide Agent" "Show Agent"}}</span>
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
+            </button>
+            <button 
+              type="button" 
+              class="bg-blue-600 hover:bg-blue-700 text-sm text-white font-medium py-2 px-4 rounded-md"
               {{on "click" this.postTicketMessage}}
             >
               Post
@@ -230,7 +240,7 @@
   </div>
 
   {{!-- Requester Info Column --}}
-  <div class="w-80 bg-white overflow-y-auto">
+  <div class="w-64 bg-white flex flex-col border-r border-gray-300 overflow-y-auto">
     <div class="p-4">
       <h2 class="text-black text-xl font-semibold mb-4">Requester Info</h2>
       
@@ -246,4 +256,98 @@
       </div>
     </div>
   </div>
+
+  {{!-- Right AI Agent column --}}
+  {{#if this.showAgent}}
+    <div class="w-96 flex-shrink-0">
+      <div class="bg-white rounded-lg borderborder-gray-200 flex flex-col h-[calc(100vh-2rem)]">
+        {{!-- Fixed header --}}
+        <div class="bg-gray-100 p-4 rounded-t-lg flex-shrink-0 border-b border-gray-300">
+          <div class="flex items-center mb-2">
+            <img 
+              src="/ai-avatar.png" 
+              alt="AI Avatar" 
+              class="w-12 h-12 rounded-lg object-cover"
+            >
+            <span class="ml-3 font-medium">AI Agent</span>
+          </div>
+          <p class="text-sm text-gray-600">Your AI Agent is now on demand!</p>
+        </div>
+        
+        {{!-- Scrollable message list --}}
+        <div class="flex-1 overflow-y-auto px-4">
+          <div class="space-y-4 py-4">
+            {{#each this.agentMessages as |message|}}
+              <div class="flex space-x-3">
+                <div class="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-gray-600 font-medium">U</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center space-x-2">
+                    <span class="font-medium text-sm">{{message.username}}</span>
+                    <span class="text-gray-500 text-xs">{{relative-time message.timestamp}}</span>
+                  </div>
+                  <p class="text-sm text-gray-700 mt-1">
+                    {{markdown message.message}}
+                  </p>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+        
+        {{!-- Fixed textarea section with summarize button --}}
+        <div class="p-4 border-t border-gray-200 flex-shrink-0">
+          <button 
+            type="button"
+            class="mb-3 text-sm border-2 border-gray-400 hover:bg-gray-100 text-gray-600 font-medium py-2 px-4 rounded-md flex items-center justify-center space-x-2"
+            disabled={{this.isLoadingSummary}}
+            {{on "click" this.summarizeThread}}
+          >
+            <span>What's happened?</span>
+            {{#if this.isLoadingSummary}}
+              <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            {{/if}}
+          </button>
+
+          <button 
+            type="button"
+            class="mb-3 text-sm border-2 border-gray-400 hover:bg-gray-100 text-gray-600 font-medium py-2 px-4 rounded-md flex items-center justify-center space-x-2"
+            {{on "click" this.personalizedEmail}}
+            disabled={{this.isLoadingEmail}}
+          >
+            <span>Write personalized email</span>
+            {{#if this.isLoadingEmail}}
+              <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            {{/if}}
+          </button>
+          
+          <div class="space-y-3">
+            <textarea 
+              class="w-full bg-gray-200 text-sm rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 min-h-[100px] resize-none"
+              placeholder="Ask the AI Agent..."
+              disabled={{true}}
+              {{on "input" this.updateAiMessageDraft}}
+            ></textarea>
+            <div class="flex justify-end pb-10">
+              <button 
+                type="button" 
+                class="bg-blue-800 text-sm hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md"
+                disabled={{true}}
+                {{on "click" this.postAiMessage}}
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 </div> 
