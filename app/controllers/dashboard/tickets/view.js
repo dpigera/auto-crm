@@ -16,7 +16,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked ticketMessages = [];
   @tracked requesterDetails = null;
   @tracked messageDraft = '';
-  @tracked showAgent = false;
+  @tracked showAgent = true;
 
   async refreshTicketsList() {
     const ticketsController = getOwner(this).lookup('controller:dashboard.tickets');

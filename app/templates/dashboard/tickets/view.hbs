@@ -259,10 +259,22 @@
 
   {{!-- Right AI Agent column --}}
   {{#if this.showAgent}}
-    <div class="w-80 flex-shrink-0">
-      <div class="bg-white p-4">
-        <h2 class="text-black text-xl font-semibold mb-4">AI Agent</h2>
-        {{!-- AI Agent content will go here --}}
+    <div class="w-96 flex-shrink-0">
+      <div class="bg-white">
+        <div class="bg-gray-100 p-4 border-b border-gray-300">
+          <div class="flex items-center mb-2">
+            <img 
+              src="/ai-avatar.png" 
+              alt="AI Avatar" 
+              class="w-12 h-12 rounded-lg object-cover"
+            >
+            <span class="ml-3 font-medium">AI Agent</span>
+          </div>
+          <p class="text-sm text-gray-600">Your AI Agent is now on demand!</p>
+        </div>
+        <div class="p-6">
+          {{!-- Rest of AI Agent content will go here --}}
+        </div>
       </div>
     </div>
   {{/if}}
