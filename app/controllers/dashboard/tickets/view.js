@@ -17,7 +17,7 @@ export default class DashboardTicketsViewController extends Controller {
   @tracked ticketMessages = [];
   @tracked requesterDetails = null;
   @tracked messageDraft = '';
-  @tracked showAgent = true;
+  @tracked showAgent = false;
   @tracked agentMessages = [
     {
       username: 'AutoCRM Agent',
@@ -188,6 +188,7 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   async summarizeThread() {
+    await this.pocketbase.authSuperUser();
     if (this.isLoadingSummary) return;
     
     this.isLoadingSummary = true;
@@ -229,6 +230,7 @@ export default class DashboardTicketsViewController extends Controller {
 
   @action
   async personalizedEmail() {
+    await this.pocketbase.authSuperUser();
     if (this.isLoadingEmail) return;
     
     this.isLoadingEmail = true;
